@@ -31,6 +31,7 @@
 
 4. Console.Read - Читает следующий символ из стандартного входного потока.
 
+
 ## Типы данных в C#
 
 1. string
@@ -62,3 +63,5 @@
 3. Console.Clear()
 
 4. Console.SetCursorPosition(10,4);
+
+5. int N = Convert.ToInt32(Console.ReadLine());
