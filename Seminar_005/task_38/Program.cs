@@ -16,20 +16,30 @@ void FillArray (double[] randomMassive)
 void MinMax (double[] minMaxFindArray, out double min, out double max)
     {
         min = minMaxFindArray[0];
-        max = minMaxFindArray[0];
-        for (int i = 1; i < minMaxFindArray.Length; i++)
+        max = minMaxFindArray[1];
+        double temp= max;
+
+
+        if (max < min)
+        {
+            temp = min;
+            min = max;
+            max = temp;
+        }
+        for (int i = 2; i < minMaxFindArray.Length; i++)
             {
                 if (min > minMaxFindArray[i])
                     {
                         min = minMaxFindArray[i];
                     }
-            }
-        for (int i = 1; i < minMaxFindArray.Length; i++)
-            {
-                if (max < minMaxFindArray[i])
+                else
                     {
-                        max = minMaxFindArray[i];
+                        if (max < minMaxFindArray[i])
+                            {
+                                max = minMaxFindArray[i];
+                            }
                     }
+
             }
     }
 
