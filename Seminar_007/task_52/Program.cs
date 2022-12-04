@@ -31,7 +31,7 @@ for (int i =0; i < m; i++)
 Console.WriteLine();
 
 
-// Поиск среднеарифметического в по столбцам
+// Поиск среднеарифметического по столбцам
 double average = 0;
 double columnsSum = 0;
 
