@@ -18,7 +18,7 @@ Console.WriteLine();
 
 int [,] matrix = new int[m,n];
 
-// Заполнение массива случайными вещественными числами
+// Заполнение массива случайными целыми числами
 for (int i =0; i < m; i++)
     {
         for (int j =0; j < n; j++)
@@ -30,6 +30,8 @@ for (int i =0; i < m; i++)
     }
 Console.WriteLine();
 
+
+// Поиск среднеарифметического в по столбцам
 double average = 0;
 double columnsSum = 0;
 
