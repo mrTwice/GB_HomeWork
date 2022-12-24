@@ -11,6 +11,7 @@
 
 Console.Clear();
 
+// Ввод размерности массива и проверка корректности введенных данных
 bool checkInput = true;
 Console.Write("Введите размер массива: ");
 string? convertInput = Console.ReadLine();
@@ -25,6 +26,7 @@ while (checkInput == false || sizeFirstArray <= 0)
 
 }
 
+// Обявление первого массива строк. Определение размерности второго массива исходя из условия задачи
 string[] firstArray= new string[sizeFirstArray];
 int sizeSecondArray = 0;
 for (int i = 0; i < firstArray.Length; i++)
@@ -35,7 +37,7 @@ for (int i = 0; i < firstArray.Length; i++)
     }
 
 
-
+// Заполнение второго массива в соотвествтии с условием.
 Console.WriteLine();
 string[] secondArray = new string[sizeSecondArray];
 int countIndexForSecondArray = 0;
@@ -48,5 +50,8 @@ for (int i = 0; i < firstArray.Length; i++)
             }
     }
 
+
+// Вывод результата работы программы
 Console.WriteLine(String.Join(", ", firstArray));
+Console.WriteLine();
 Console.WriteLine(String.Join(", ", secondArray));
