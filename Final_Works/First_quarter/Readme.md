@@ -25,4 +25,4 @@
 
 
 
-
+![Альтернативный текст](/block_diagram/first_quarter.png "Подсказка")
