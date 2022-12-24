@@ -25,4 +25,13 @@
 
 
 
-![Альтернативный текст](/block_diagram/first_quarter.png "Подсказка")
+Выполнение
+===
+
+
+
+## Блок Схема
+
+![Блок-схема решаемой задачи](/Final_Works/First_quarter/first_quarter.png "блок-схема")
+
+![diagram](/Final_Works/First_quarter/first_quarter.drawio )
