@@ -27,7 +27,7 @@ while (checkInput == false || sizeFirstArray <= 0)
 
 string[] firstArray= new string[sizeFirstArray];
 int sizeSecondArray = 0;
-for (int i = 0; i < sizeFirstArray; i++)
+for (int i = 0; i < firstArray.Length; i++)
     {
         Console.Write($"Введите элемент массива {i}: ");
         firstArray[i] = Console.ReadLine();
@@ -39,7 +39,7 @@ for (int i = 0; i < sizeFirstArray; i++)
 Console.WriteLine();
 string[] secondArray = new string[sizeSecondArray];
 int countIndexForSecondArray = 0;
-for (int i = 0; i < sizeFirstArray; i++)
+for (int i = 0; i < firstArray.Length; i++)
     {
         if (firstArray[i].Length <= 3)
             {
