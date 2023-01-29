@@ -2,7 +2,7 @@
 # 123 -> 6 (1 + 2 + 3)
 # 100 -> 1 (1 + 0 + 0)
 
-string_input = input("Введите трехзначное число: ")
+string_input = input('Введите трехзначное число: ')
 check_the_number = False
 
 while check_the_number == False:
