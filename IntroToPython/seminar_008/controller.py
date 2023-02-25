@@ -1,5 +1,6 @@
 import view
 import db_manager
+
 db_manager.open_db()
 
 def enter():
