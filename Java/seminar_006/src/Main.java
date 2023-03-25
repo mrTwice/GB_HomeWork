@@ -36,7 +36,9 @@ public class Main {
     static void printFriendsList(ArrayList<Person> friendsList){
         System.out.println("--------------------------------------------------------------");
         for(Person person: friendsList){
-            System.out.println(person);
+            if( person.getAge() > 20) {
+                System.out.println(person);
+            }
         }
     }
 }
