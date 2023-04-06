@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Nodes {
-    private int idNode = 0;
+    private static int idNode = 0;
     private Person husband;
     private Person wife;
 
