@@ -5,16 +5,18 @@ import genealogy.humans.Person;
 import java.util.ArrayList;
 
 public class Nodes {
-    private static Integer idNode = 0;
+    private static Integer id = 0;
+    private int idNode;
     private Integer husbandID;
     private Integer wifeID;
 
     private ArrayList<Person> childrens = new ArrayList<>();
 
     public Nodes(Integer husbandID, Integer wifeID){
+        this.idNode = id;
         this.husbandID = husbandID;
         this.wifeID = wifeID;
-        idNode ++;
+        id ++;
     }
 
     public int getIdNode() {
@@ -27,5 +29,9 @@ public class Nodes {
 
     public Integer getWife() {
         return wifeID;
+    }
+
+    public void addChildrens(Person person){
+        childrens.add(person);
     }
 }

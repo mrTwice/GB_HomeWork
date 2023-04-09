@@ -1,34 +1,29 @@
 package genealogy.tree;
 
+import genealogy.humans.Person;
+
+import java.util.HashMap;
 import java.util.TreeMap;
 
 public class FamilyTree implements BaseTree{
-    private TreeMap<Integer, Generations> generations = new TreeMap<>();
-    private TreeMap<Integer, Nodes> nodes = new TreeMap<>();
+    private HashMap<Integer, Generations> generations = new HashMap<>();
+    private static HashMap<Integer, Person> allPersons = new HashMap<>();
+    public HashMap<Integer, Generations> getGenerations() { return generations; }
 
-    public FamilyTree(Generations generation, Nodes node){
-        this.generations.put(generation.getIdGeneration(), generation);
-        this.nodes.put(node.getIdNode(), node);
-    }
-
-    public FamilyTree(Generations generation){
+    public void addGenerationToTree(Generations generation) {
         this.generations.put(generation.getIdGeneration(), generation);
     }
 
-    public TreeMap<Integer, Generations> getGenerations() { return generations; }
-
-    public TreeMap<Integer, Nodes> getNodes() {
-        return nodes;
+    public void addPerson(Person person){
+        allPersons.put(person.getIdPerson(), person);
     }
-
     @Override
-    public void printOutAllPersonInGeneration() {
-        System.out.println(generations);
-    }
-
-    @Override
-    public void printOutAllNodesInGeneration() {
-        System.out.println(nodes);
+    public void printPersonForAllGenerations() {
+        for (Generations generation: generations.values()) {
+            System.out.println();
+            System.out.printf("Поколение №%d\n",generation.getIdGeneration());
+            generation.printAllPersonsInGeneration();
+        }
     }
 
 }

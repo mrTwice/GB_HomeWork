@@ -1,7 +1,10 @@
 package genealogy.humans;
 
+import java.util.HashMap;
+
 public class Person {
-    private static Integer id = 0;
+    private static int id = 0;
+    private int idPerson;
     private String surname;
     private String name;
     private String patronym;
@@ -11,11 +14,12 @@ public class Person {
     private Integer fatherID;
 
     public Person(String surname, String name, String patronym, String birthday) {
+        this.idPerson = id;
         this.surname = surname;
         this.name = name;
         this.patronym = patronym;
         this.birthday = birthday;
-        id ++;
+        id++;
     }
 
     public void setMatherId(Integer matherId) {
@@ -36,9 +40,9 @@ public class Person {
 
     public Integer getFatherID() {return fatherID;}
 
-    public int getId() {return id;}
+    public int getIdPerson() {return idPerson;}
 
     public String toString(){
-        return String.format("%d %s %s %s %s", id, surname, name, patronym, birthday);
+        return String.format("\tidPerson = %d\n\t\t%s %s %s %s г.р.",idPerson, surname, name, patronym, birthday);
     }
 }
