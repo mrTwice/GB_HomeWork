@@ -3,12 +3,14 @@ package MyCalculator;
 import java.util.Scanner;
 
 public class Controller<T extends  Calculating> {
-    View view;
+    PrintToConsole view;
     Calculator calculator;
+    ConsoleInput input;
 
-    public Controller(T typeCalculating, View view) {
+    public Controller(T typeCalculating, PrintToConsole view, ConsoleInput input) {
         this.view = view;
         this.calculator = typeCalculating;
+        this.input = input;
     }
 
     public void startCalculating() {
@@ -19,16 +21,16 @@ public class Controller<T extends  Calculating> {
             int answer = intputChoise.nextInt();
             switch (answer){
                 case 1:
-                    calculator.setNumberX(new RealNumbers(view.inputRealPart("a: ")));
-                    calculator.setNumberY(new RealNumbers(view.inputRealPart("b: ")));
+                    calculator.setNumberX(new RealNumbers(input.inputRealPart("a: ")));
+                    calculator.setNumberY(new RealNumbers(input.inputRealPart("b: ")));
                     String resultOfSumRealNumbers = calculator.result();
                     view.print(resultOfSumRealNumbers, "Sum: ");
                     break;
                 case 2:
-                    calculator.setNumberX(new ComplexNumbers(view.inputRealPart("действительная часть первого числа: "),
-                            view.inputImaginaryPart("мнимая часть первого числа: ")));
-                    calculator.setNumberY(new ComplexNumbers(view.inputRealPart("действительная часть второго числа: "),
-                            view.inputImaginaryPart("мнимая часть второго числа: ")));
+                    calculator.setNumberX(new ComplexNumbers(input.inputRealPart("действительная часть первого числа: "),
+                            input.inputImaginaryPart("мнимая часть первого числа: ")));
+                    calculator.setNumberY(new ComplexNumbers(input.inputRealPart("действительная часть второго числа: "),
+                            input.inputImaginaryPart("мнимая часть второго числа: ")));
                     String resultOfSumComplexNumbers = calculator.result();
                     view.print(resultOfSumComplexNumbers, "Sum: ");
                     break;
