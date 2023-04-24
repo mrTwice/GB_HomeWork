@@ -1,4 +1,4 @@
-package MyCalculator;
+package MyCalculator.Objects;
 
 public class RealNumbers extends Numbers {
 

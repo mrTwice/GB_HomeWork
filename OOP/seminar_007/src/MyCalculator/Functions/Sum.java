@@ -1,6 +1,12 @@
-package MyCalculator;
+package MyCalculator.Functions;
 
-public class Sum extends Calculating{
+import MyCalculator.Input.ConsoleInput;
+import MyCalculator.MVP.Model;
+import MyCalculator.MVP.PrintToConsole;
+import MyCalculator.Objects.Numbers;
+import MyCalculator.Operations;
+
+public class Sum extends Operations {
 
     public  Sum() {
 
@@ -27,4 +33,10 @@ public class Sum extends Calculating{
         super.numberY = value;
     }
 
+    public static class Main {
+        public static void main(String[] args) {
+            Model sum = new Model(new Sum(), new PrintToConsole(), new ConsoleInput());
+            sum.startCalculating();
+        }
+    }
 }

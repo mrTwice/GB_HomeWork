@@ -1,13 +1,18 @@
-package MyCalculator;
+package MyCalculator.MVP;
+
+import MyCalculator.*;
+import MyCalculator.Input.ConsoleInput;
+import MyCalculator.Objects.ComplexNumbers;
+import MyCalculator.Objects.RealNumbers;
 
 import java.util.Scanner;
 
-public class Controller<T extends  Calculating> {
+public class Model<T extends Operations> {
     PrintToConsole view;
     Calculator calculator;
     ConsoleInput input;
 
-    public Controller(T typeCalculating, PrintToConsole view, ConsoleInput input) {
+    public Model(T typeCalculating, PrintToConsole view, ConsoleInput input) {
         this.view = view;
         this.calculator = typeCalculating;
         this.input = input;

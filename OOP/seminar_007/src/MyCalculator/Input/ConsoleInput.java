@@ -1,8 +1,10 @@
-package MyCalculator;
+package MyCalculator.Input;
+
+import MyCalculator.Input.InputData;
 
 import java.util.Scanner;
 
-public class ConsoleInput implements InputData{
+public class ConsoleInput implements InputData {
 
     public ConsoleInput(){
 

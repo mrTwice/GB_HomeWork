@@ -1,4 +1,6 @@
-package MyCalculator;
+package MyCalculator.MVP;
+
+import MyCalculator.MVP.View;
 
 public class PrintToConsole implements View {
 

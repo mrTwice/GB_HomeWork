@@ -1,4 +1,4 @@
-package MyCalculator;
+package MyCalculator.Input;
 
 public interface InputData {
     double inputRealPart(String item);
