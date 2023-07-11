@@ -16,38 +16,6 @@ public class BinTree {
         }
     }
 
-//    public boolean add(int value) {
-//        if (root == null) {
-//            root = new Node(value);
-//            root.color = Color.black;
-//            return true;
-//        }
-//        if (addNode(root, value))
-//            return true;
-//        return false;
-//
-//    }
-
-
-
-//    private Node addNode(Node node, int value) {
-//        if (node.value == value)
-//            return null;
-//        if (node.value > value) {
-//            if (node.left == null) {
-//                node.left = new Node(value);
-//                return node.left;
-//            } else
-//                return addNode(node.left, value);
-//        } else  {
-//            if (node.right == null) {
-//                node.right = new Node(value);
-//                return node.right;
-//            } else
-//                return addNode(node.right, value);
-//        }
-//    }
-
     private boolean addNode(Node node, int value) {
         if (node.value == value) {
             return false;
@@ -148,14 +116,6 @@ public class BinTree {
         private Node left;
         private Node right;
         private Color color;
-//        Node() {
-//            this.color = Color.red;
-//        }
-//
-//        Node(int _value) {
-//            this.value = _value;
-//            this.color = Color.red;
-//        }
     }
     private enum Color {RED, BLACK}
 }
