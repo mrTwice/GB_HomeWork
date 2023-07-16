@@ -6,7 +6,6 @@ public class Main {
         ArrayList<Person> friendsList = new ArrayList<>();
         Scanner consoleInput = new Scanner(System.in);
         while (true){
-
             System.out.print("Желаете добавить друга (y|n): ");
             String answer = consoleInput.nextLine();
             if(answer.equals("y")){
