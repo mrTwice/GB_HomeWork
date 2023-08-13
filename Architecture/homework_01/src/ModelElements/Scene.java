@@ -1,6 +1,5 @@
 package ModelElements;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 public class Scene {
     public int id;
@@ -9,8 +8,11 @@ public class Scene {
 
     public List<Camera> Cameras;
 
-    public Scene(List<PoligonalModel> Models, List<Flash> Flashes, List<Camera> Cameras) {
-        this.Models = Models;
+    public Scene(int id, List<PoligonalModel> Models, List<Flash> Flashes, List<Camera> Cameras) throws Exception {
+        this.id = id;
+        if (Models.size() > 0) {
+            this.Models = Models;
+        } else throw new Exception("Нужна модель");
         this.Flashes = Flashes;
         this.Cameras = Cameras;
     }
