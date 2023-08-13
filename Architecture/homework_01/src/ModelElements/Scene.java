@@ -7,9 +7,12 @@ public class Scene {
     public  List<PoligonalModel> Models;
     public  List<Flash> Flashes;
 
-    public Scene() {
-        this.Models = new ArrayList<>();
-        this.Flashes = new ArrayList<>();
+    public List<Camera> Cameras;
+
+    public Scene(List<PoligonalModel> Models, List<Flash> Flashes, List<Camera> Cameras) {
+        this.Models = Models;
+        this.Flashes = Flashes;
+        this.Cameras = Cameras;
     }
     public Type method1(Type type){
         return type;
