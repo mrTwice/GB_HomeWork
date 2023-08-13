@@ -7,12 +7,12 @@ import ModelElements.Scene;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelStore implements IModelChanger, IModelChangedObserver{
+public class ModelStore implements IModelChanger{
     public List<PoligonalModel> Models;
     public List<Scene> Scenes;
     public List<Flash> Flashes;
     public List<Camera> Cameras;
-    private List<IModelChangedObserver> changeObservers =new ArrayList<>();
+    private List<IModelChangedObserver> changeObservers;
 
     public ModelStore() {
         this.Models = new ArrayList<>();
@@ -24,10 +24,7 @@ public class ModelStore implements IModelChanger, IModelChangedObserver{
     public Scene GetScene(int id){
         return Scenes.get(id);
     }
-    @Override
-    public void ApplyUpdateModel() {
 
-    }
 
     @Override
     public void NotifyCange(IModelChanger sender) {

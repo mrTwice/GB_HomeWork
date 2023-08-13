@@ -14,7 +14,9 @@ public class Scene {
             this.Models = Models;
         } else throw new Exception("Нужна модель");
         this.Flashes = Flashes;
+        if ( Cameras.size() > 0) {
         this.Cameras = Cameras;
+        } else throw new Exception("Нужна камера");
     }
     public Type method1(Type type){
         return type;
