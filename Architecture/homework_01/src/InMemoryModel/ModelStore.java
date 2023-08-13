@@ -35,8 +35,9 @@ public class ModelStore implements IModelChanger{
             if (Scenes.get(i).id == id){
                 return Scenes.get(i);
             }
-            return null;
+
         }
+        return null;
     }
 
 
