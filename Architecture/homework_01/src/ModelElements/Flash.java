@@ -2,14 +2,13 @@ package ModelElements;
 
 import Stuff.Angle3D;
 import Stuff.Color;
-import Stuff.Float;
 import Stuff.Point3D;
 
 public class Flash {
     public Point3D Location;
     public Angle3D Angle;
     public Color Color;
-    public Float Power;
+    public float Power;
 
     public Flash(Point3D location, Angle3D angle, Stuff.Color color, Float power) {
         this.Location = location;
