@@ -14,7 +14,8 @@ public class ModelStore implements IModelChanger{
     public List<Camera> Cameras;
     private List<IModelChangedObserver> changeObservers;
 
-    public ModelStore() {
+    public ModelStore(List<IModelChangedObserver> changeObservers) {
+        this.changeObservers = changeObservers;
         this.Models = new ArrayList<>();
         this.Scenes = new ArrayList<>();
         this.Flashes = new ArrayList<>();
