@@ -2,7 +2,7 @@ package Vehicles;
 
 import Engines.GasEngine;
 
-public class GasCar extends CarCreate {
+public class GasCar implements Car {
 
     public GasCar() {
         GasEngine engine = new GasEngine();

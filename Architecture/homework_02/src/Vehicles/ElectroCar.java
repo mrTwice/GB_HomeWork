@@ -2,7 +2,7 @@ package Vehicles;
 
 import Engines.ElectroEngine;
 
-public class ElectroCar extends CarCreate {
+public class ElectroCar implements Car {
     public ElectroCar() {
         ElectroEngine engine = new ElectroEngine();
         engine.information();
