@@ -1,0 +1,116 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Apple {
+  + Apple(String, String, String, int): 
+}
+class BasketRepository {
+  + BasketRepository(): 
+  - addedProducts: List<Product>
+  + addProductToBasket(Product): void
+   addedProducts: List<Product>
+}
+class BuyersRepository {
+  - BuyersRepository(): 
+  - buyersRepository: BuyersRepository
+  + getBuyerById(int): User
+   buyersList: List<User>
+   buyersRepository: BuyersRepository
+}
+class DataBase {
+  + DataBase(): 
+  - buyers: List<User>
+  - products: List<Product>
+   buyers: List<User>
+   products: List<Product>
+}
+class Google {
+  + Google(String, String, String, int): 
+}
+interface IBasket << interface >> {
+  + addProductToBasket(Product): void
+}
+interface IBuyer << interface >> {
+  + getBuyerById(int): User
+   buyersList: List<User>
+}
+interface IDataBase << interface >> {
+  + addProduct(Product): void
+  + getProductById(int): Product
+   allProducts: List<Product>
+}
+class Main {
+  + Main(): 
+  + main(String[]): void
+}
+class MarketPlace {
+  + MarketPlace(): 
+  + showAllProductsInBasket(User): List<Product>
+  + payTheProducts(User, List<Product>): boolean
+}
+class Phone {
+  + Phone(String, String, String, int): 
+}
+class Product {
+  + Product(String, String, int): 
+  - price: int
+  - id: int
+  - description: String
+  - name: String
+   price: int
+   name: String
+   description: String
+   id: int
+}
+class ProductsPerository {
+  - ProductsPerository(): 
+  - productsPerository: ProductsPerository
+  + addProduct(Product): void
+  + getProductById(int): Product
+   productsPerository: ProductsPerository
+   allProducts: List<Product>
+}
+class Samsung {
+  + Samsung(String, String, String, int): 
+}
+class User {
+  + User(String, String, long, int): 
+  - firstName: String
+  - passwordHash: int
+  - lastName: String
+  - cardNumber: long
+  - id: int
+  - basket: BasketRepository
+  + equals(User): boolean
+  + toString(): String
+  + equals(Object): boolean
+   basket: BasketRepository
+   firstName: String
+   lastName: String
+   cardNumber: long
+   id: int
+   passwordHash: int
+}
+
+Apple               -[#000082,plain]-^  Phone              
+BasketRepository    -[#008200,dashed]-^  IBasket            
+BasketRepository   "1" *-[#595959,plain]-> "addedProducts\n*" Product            
+BuyersRepository    -[#008200,dashed]-^  IBuyer             
+BuyersRepository   "1" *-[#595959,plain]-> "buyers\n*" User               
+DataBase            -[#595959,dashed]->  Apple              : "«create»"
+DataBase            -[#595959,dashed]->  Google             : "«create»"
+DataBase           "1" *-[#595959,plain]-> "products\n*" Product            
+DataBase            -[#595959,dashed]->  Samsung            : "«create»"
+DataBase            -[#595959,dashed]->  User               : "«create»"
+DataBase           "1" *-[#595959,plain]-> "buyers\n*" User               
+Google              -[#000082,plain]-^  Phone              
+Phone               -[#000082,plain]-^  Product            
+ProductsPerository  -[#008200,dashed]-^  IDataBase          
+ProductsPerository "1" *-[#595959,plain]-> "products\n*" Product            
+Samsung             -[#000082,plain]-^  Phone              
+User               "1" *-[#595959,plain]-> "basket\n1" BasketRepository   
+User                -[#595959,dashed]->  BasketRepository   : "«create»"
+@enduml
