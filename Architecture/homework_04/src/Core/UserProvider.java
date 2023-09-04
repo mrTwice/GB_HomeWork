@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Класс - провайдер для работы с базой данных клиентов
  */
-public class UserProvider {
+public class UserProvider extends TicketProvider {
     private IUserRepo clientRepository;
 
     /**
