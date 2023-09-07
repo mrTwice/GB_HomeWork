@@ -1,4 +1,4 @@
-package Application.Models.Primitives.Users;
+package Application.Logic.Primitives.Users;
 
 public class Staff extends User {
     private static int idStaff = 0;

@@ -1,6 +1,6 @@
 package Application.DataBaseInterfaces;
 
-import Application.Models.Primitives.Order;
+import Application.Logic.Primitives.Order;
 
 import java.util.List;
 

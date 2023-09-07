@@ -1,6 +1,6 @@
 package Application.DataBaseInterfaces;
 
-import Application.Models.Primitives.Product;
+import Application.Logic.Primitives.Product;
 
 import java.util.List;
 

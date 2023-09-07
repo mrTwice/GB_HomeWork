@@ -1,21 +1,21 @@
 package Domain;
 
 import Application.DataBaseInterfaces.IOrderRepo;
-import Application.Models.Primitives.Order;
+import Application.Logic.Primitives.Order;
 
 import java.util.List;
 
 public class OrderRepository implements IOrderRepo {
-    private static OrderRepository orderReposytory;
+    private static OrderRepository orderRepository;
     private List<Order> orders;
 
-    private OrderRepository(){orderReposytory = getOrderRepository();}
+    private OrderRepository(){orderRepository = getOrderRepository();}
 
     public static OrderRepository getOrderRepository(){
-        if(orderReposytory == null){
-            orderReposytory = new OrderRepository();
+        if(orderRepository == null){
+            orderRepository = new OrderRepository();
         }
-        return orderReposytory;
+        return orderRepository;
     }
 @Override
     public List<Order> getAllOrders(){

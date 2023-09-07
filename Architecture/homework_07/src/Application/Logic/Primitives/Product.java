@@ -1,6 +1,6 @@
-package Application.Models.Primitives;
+package Application.Logic.Primitives;
 
-import Application.Models.Primitives.Users.Supplier;
+import Application.Logic.Primitives.Users.Supplier;
 import java.util.List;
 
 public class Product {

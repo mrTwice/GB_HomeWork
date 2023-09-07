@@ -1,4 +1,4 @@
-package Application.Models.Providers;
+package Application.Logic.Providers;
 
 import Domain.SupplierRepository;
 

@@ -1,7 +1,7 @@
 package Domain;
 
 import Application.DataBaseInterfaces.IProductRepo;
-import Application.Models.Primitives.Product;
+import Application.Logic.Primitives.Product;
 import java.util.List;
 
 public class ProductRepository implements IProductRepo {

@@ -1,7 +1,7 @@
-package Application;
+package Application.Logic;
 
-import Application.Models.Primitives.Users.Staff;
-import Application.Models.Providers.*;
+import Application.Logic.Primitives.Users.Staff;
+import Application.Logic.Providers.*;
 
 public class MainLogic {
     private OrderProvider orderProvider;

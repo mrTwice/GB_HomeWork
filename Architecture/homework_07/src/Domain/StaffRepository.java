@@ -1,7 +1,7 @@
 package Domain;
 
 import Application.DataBaseInterfaces.IStaffRepo;
-import Application.Models.Primitives.Users.Staff;
+import Application.Logic.Primitives.Users.Staff;
 
 import java.util.List;
 

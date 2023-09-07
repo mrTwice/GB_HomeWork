@@ -1,4 +1,4 @@
-package Application.Models.Primitives.Users;
+package Application.Logic.Primitives.Users;
 
 public class Supplier extends User{
     private static int idSupplier = 0;

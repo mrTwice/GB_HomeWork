@@ -1,10 +1,10 @@
 package Domain;
 
-import Application.DataBaseInterfaces.IProviderRepo;
-import Application.Models.Primitives.Users.Supplier;
+import Application.DataBaseInterfaces.ISupplierRepo;
+import Application.Logic.Primitives.Users.Supplier;
 import java.util.List;
 
-public class SupplierRepository implements IProviderRepo {
+public class SupplierRepository implements ISupplierRepo {
     private static SupplierRepository supplierRepository;
     private List<Supplier> suppliers;
 

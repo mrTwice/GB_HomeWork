@@ -1,7 +1,7 @@
 package Domain;
 
 import Application.DataBaseInterfaces.ICustomerRepo;
-import Application.Models.Primitives.Users.Customer;
+import Application.Logic.Primitives.Users.Customer;
 
 import java.util.List;
 

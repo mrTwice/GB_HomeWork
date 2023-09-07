@@ -1,7 +1,7 @@
-package Application.Models.Primitives;
+package Application.Logic.Primitives;
 
-import Application.Models.Primitives.Users.Customer;
-import Application.Models.Primitives.Users.Supplier;
+import Application.Logic.Primitives.Users.Customer;
+import Application.Logic.Primitives.Users.Supplier;
 
 import java.util.ArrayList;
 import java.util.Date;
