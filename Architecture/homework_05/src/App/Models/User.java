@@ -1,9 +1,4 @@
-package Models;
-
-import Services.BasketRepository;
-
-import java.util.ArrayList;
-import java.util.List;
+package App.Models;
 
 public class User {
     private static int id =0;
@@ -11,11 +6,11 @@ public class User {
     private String lastName;
     private long cardNumber;
     private int passwordHash;
-    private BasketRepository basket;
+    //private BasketRepository basket;
 
     public User(String firstName, String lastName, long cardNumber, int passwordHash) {
         this.id++;
-        this.basket = new BasketRepository();
+        //this.basket = new BasketRepository();
         this.firstName = firstName;
         this.lastName = lastName;
         this.cardNumber = cardNumber;
@@ -26,9 +21,9 @@ public class User {
         return id;
     }
 
-    public BasketRepository getBasket(){
-        return basket;
-    }
+//    public BasketRepository getBasket(){
+//        return basket;
+//    }
 
     public String getFirstName() {
         return firstName;

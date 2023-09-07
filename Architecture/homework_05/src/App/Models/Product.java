@@ -1,6 +1,6 @@
-package Models;
+package App.Models;
 
-public abstract class Product {
+public class Product {
     private static int id = 0;
     private String name;
     private String description;
