@@ -1,6 +1,6 @@
 package Application.DataBaseInterfaces;
 
-import Application.Models.Primitives.Staff;
+import Application.Models.Primitives.Users.Staff;
 
 import java.util.List;
 

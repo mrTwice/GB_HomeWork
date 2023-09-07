@@ -1,10 +1,10 @@
 package Application.DataBaseInterfaces;
 
-import Application.Models.Primitives.Provider;
+import Application.Models.Primitives.Users.Supplier;
 
 import java.util.List;
 
 public interface IProviderRepo {
-    List<Provider> getAllProviders();
-    Provider getProviderByID(int id);
+    List<Supplier> getAllProviders();
+    Supplier getProviderByID(int id);
 }

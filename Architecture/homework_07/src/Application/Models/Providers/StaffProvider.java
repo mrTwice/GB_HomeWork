@@ -7,4 +7,5 @@ public class StaffProvider {
     public StaffProvider(){
         this.staffRepository = StaffRepository.getStaffRepository();
     }
+
 }
