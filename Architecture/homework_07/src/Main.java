@@ -1,5 +1,8 @@
+import Application.Logic.MainPresenter;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        MainPresenter presenter = new MainPresenter();
+        presenter.createReport();
     }
 }
