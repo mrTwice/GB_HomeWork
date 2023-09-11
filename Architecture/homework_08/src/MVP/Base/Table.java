@@ -1,4 +1,4 @@
-package Base;
+package MVP.Base;
 
 import java.util.Date;
 
@@ -10,8 +10,8 @@ public class Table {
     private Guest guest;
     private Date reserveDate;
 
-    public Table(Hall hall, int seats) {
-        this.idHall = hall.getId();
+    public Table(int idHall, int seats) {
+        this.idHall = idHall;
         this.seats = seats;
     }
 

@@ -1,4 +1,4 @@
-package Base;
+package MVP.Base;
 
 public class Guest {
     private static int id =0;

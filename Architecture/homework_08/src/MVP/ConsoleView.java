@@ -1,12 +1,11 @@
 package MVP;
 
-import Base.Hall;
-import Base.Table;
+import MVP.Base.Hall;
+import MVP.Base.Table;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 

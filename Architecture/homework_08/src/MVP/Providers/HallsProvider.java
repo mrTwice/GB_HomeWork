@@ -1,6 +1,6 @@
 package MVP.Providers;
 
-import Base.Hall;
+import MVP.Base.Hall;
 import MVP.Repository.HallsRepository;
 
 import java.util.List;

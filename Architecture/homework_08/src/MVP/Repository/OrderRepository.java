@@ -1,7 +1,8 @@
 package MVP.Repository;
 
-import Base.Order;
+import MVP.Base.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderRepository {
@@ -9,7 +10,7 @@ public class OrderRepository {
     private List<Order> orders;
 
     private OrderRepository (){
-        orderRepository = getOrderRepository();
+        this.orders = new ArrayList<>();
     }
 
     public static OrderRepository getOrderRepository(){

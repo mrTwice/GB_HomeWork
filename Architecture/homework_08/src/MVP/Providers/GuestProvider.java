@@ -1,6 +1,6 @@
 package MVP.Providers;
 
-import Base.Guest;
+import MVP.Base.Guest;
 import MVP.Repository.GuestRepository;
 
 import java.util.List;

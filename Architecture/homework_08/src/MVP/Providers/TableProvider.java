@@ -1,7 +1,7 @@
 package MVP.Providers;
 
-import Base.Guest;
-import Base.Table;
+import MVP.Base.Guest;
+import MVP.Base.Table;
 import MVP.Repository.TableRepository;
 
 import java.util.Date;

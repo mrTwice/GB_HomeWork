@@ -1,7 +1,8 @@
 package MVP.Repository;
 
-import Base.Guest;
+import MVP.Base.Guest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,7 +11,7 @@ public class GuestRepository {
     private List<Guest> guests;
 
     private GuestRepository(){
-        guestRepository = getGuestRepository();
+        this.guests = new ArrayList<>();
     }
 
     public static GuestRepository getGuestRepository(){

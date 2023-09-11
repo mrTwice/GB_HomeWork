@@ -1,7 +1,7 @@
 package MVP.Providers;
 
-import Base.Guest;
-import Base.Order;
+import MVP.Base.Guest;
+import MVP.Base.Order;
 import MVP.Repository.OrderRepository;
 
 import java.util.Date;

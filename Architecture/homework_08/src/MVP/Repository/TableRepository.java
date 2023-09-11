@@ -1,7 +1,8 @@
 package MVP.Repository;
 
-import Base.Table;
+import MVP.Base.Table;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TableRepository {
@@ -9,7 +10,10 @@ public class TableRepository {
     private List<Table> tables;
 
     private TableRepository(){
-        tableRepository = getTableRepository();
+        this.tables = new ArrayList<>();
+        tables.add(new Table(1, 2));
+        tables.add(new Table(1, 4));
+        tables.add(new Table(2, 2));
     }
 
     public static TableRepository getTableRepository(){

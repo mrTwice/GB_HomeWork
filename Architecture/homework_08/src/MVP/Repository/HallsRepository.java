@@ -1,7 +1,8 @@
 package MVP.Repository;
 
-import Base.Hall;
+import MVP.Base.Hall;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HallsRepository {
@@ -9,7 +10,10 @@ public class HallsRepository {
     private List<Hall> halls;
 
     private HallsRepository(){
-        hallsRepository = getHallRepository();
+        this.halls = new ArrayList<>();
+        halls.add(new Hall("Веранда", "На улице"));
+        halls.add(new Hall("Каменный", "с камином"));
+        halls.add(new Hall("Оранжерея", "с растениями"));
     }
 
     public static HallsRepository getHallRepository(){

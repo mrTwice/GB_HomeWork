@@ -1,7 +1,7 @@
 package MVP;
 
 
-import Base.Guest;
+import MVP.Base.Guest;
 import MVP.Providers.*;
 
 public class Model {
