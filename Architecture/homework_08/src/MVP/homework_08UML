@@ -1,0 +1,214 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class ConsoleView {
+  + ConsoleView(Presenter): 
+  - guestCount: int
+  - phoneNumber: String
+  - presenter: Presenter
+  - idTable: int
+  - idHall: int
+  - name: String
+  - visitDate: Date
+  # showStartScreen(): void
+  # showTableSelectionScreen(int): void
+  + getVisitDate(): Date
+  # showHallsSelectionScreen(): void
+  + getIdHall(): int
+  - convertStringToInt(String): int
+  - convertStrindDateToDate(String): Date
+  - fillTextFild(): String
+  + getIdTable(): int
+}
+class Guest {
+  + Guest(String, String): 
+  - name: String
+  - id: int
+  - phoneNumber: String
+  + getName(): String
+  + getPhoneNumber(): String
+  + getId(): int
+}
+class GuestProvider {
+  + GuestProvider(): 
+  - guestRepository: GuestRepository
+  + getGuests(): List<Guest>
+  + checkGuestByName(String): boolean
+  + checkGuestByPhone(String): boolean
+  + addGuest(String, String): Guest
+  + getGuestByPhoneNumber(String): Guest
+}
+class GuestRepository {
+  - GuestRepository(): 
+  - guests: List<Guest>
+  - guestRepository: GuestRepository
+  + getGuestRepository(): GuestRepository
+  + getGuestByID(int): Guest
+  + getAllGuests(): List<Guest>
+  + addNewGuest(Guest): void
+}
+class Hall {
+  + Hall(String, String): 
+  - photos: List<Image>
+  - title: String
+  - description: String
+  - id: int
+  + getTitle(): String
+  + getId(): int
+  + addPhoto(Image): void
+  + getDescription(): String
+  + getPhotos(): List<Image>
+}
+class HallsProvider {
+  + HallsProvider(): 
+  - hallsRepository: HallsRepository
+  + getHalls(): List<Hall>
+  + getHallByID(int): Hall
+}
+class HallsRepository {
+  - HallsRepository(): 
+  - halls: List<Hall>
+  - hallsRepository: HallsRepository
+  + getHallRepository(): HallsRepository
+  + getAllHalls(): List<Hall>
+}
+class Main {
+  + Main(): 
+  + main(String[]): void
+}
+class Model {
+  + Model(): 
+  - hallsProvider: HallsProvider
+  - orderProvider: OrderProvider
+  - tableProvider: TableProvider
+  - guest: Guest
+  - guestProvider: GuestProvider
+  + getOrderProvider(): OrderProvider
+  + getHallsProvider(): HallsProvider
+  + getTableProvider(): TableProvider
+  + setGuest(Guest): void
+  + getGuestProvider(): GuestProvider
+  + getGuest(): Guest
+}
+class Order {
+  + Order(int, Date, int, int): 
+  - visitDate: Date
+  - idHall: int
+  - idGuest: int
+  - idTable: int
+  - id: int
+  - confirmation: boolean
+  + getIdHall(): int
+  + getId(): int
+  + isConfirmation(): boolean
+  + getIdTable(): int
+  + getIdGuest(): int
+  + getVisitDate(): Date
+}
+class OrderProvider {
+  + OrderProvider(): 
+  - orderRepository: OrderRepository
+  + createOrder(Guest, Date, int, int): void
+}
+class OrderRepository {
+  - OrderRepository(): 
+  - orders: List<Order>
+  - orderRepository: OrderRepository
+  + getAllOrders(): List<Order>
+  + getOrderById(int): Order
+  + addNewOrder(Order): void
+  + getOrderRepository(): OrderRepository
+}
+class Presenter {
+  + Presenter(): 
+  - consoleView: ConsoleView
+  - model: Model
+  + setGest(Guest): void
+  + launchApp(): void
+  + loadsTableByIdHall(int): List<Table>
+  + createNewGests(String, String): Guest
+  + loadHalls(): List<Hall>
+}
+class Table {
+  + Table(Hall, int): 
+  - guest: Guest
+  - id: int
+  - seats: int
+  - idHall: int
+  - isBusy: boolean
+  - reserveDate: Date
+  + getId(): int
+  + getSeats(): int
+  + setTableStatusIsBusy(): void
+  + setGuest(Guest): void
+  + getGuest(): Guest
+  + setReserveDate(Date): void
+  + getIdHall(): int
+  + setTableStatusIsFree(): void
+  + getTableStatus(): boolean
+  + getReserveDate(): Date
+}
+class TableProvider {
+  + TableProvider(): 
+  - tableRepository: TableRepository
+  + tableIsBusy(int, int): boolean
+  + findTableByID(int, int): Table
+  + getTablesByHallID(int): List<Table>
+  + reserveTable(int, int, Date, Guest): boolean
+  + unReserveTable(int, int): boolean
+  + getTableByID(int, int): Table
+}
+class TableRepository {
+  - TableRepository(): 
+  - tableRepository: TableRepository
+  - tables: List<Table>
+  + getTableRepository(): TableRepository
+  + getAllTables(): List<Table>
+}
+
+ConsoleView      -[#595959,dashed]->  ConsoleView     
+ConsoleView      -[#595959,dashed]->  Hall            
+ConsoleView     "1" *-[#595959,plain]-> "presenter\n1" Presenter       
+ConsoleView      -[#595959,dashed]->  Table           
+GuestProvider    -[#595959,dashed]->  Guest           
+GuestProvider    -[#595959,dashed]->  GuestProvider   
+GuestProvider   "1" *-[#595959,plain]-> "guestRepository\n1" GuestRepository 
+GuestRepository  -[#595959,dashed]->  Guest           
+GuestRepository "1" *-[#595959,plain]-> "guestRepository\n1" GuestRepository 
+HallsProvider    -[#595959,dashed]->  Hall            
+HallsProvider    -[#595959,dashed]->  HallsProvider   
+HallsProvider   "1" *-[#595959,plain]-> "hallsRepository\n1" HallsRepository 
+HallsRepository  -[#595959,dashed]->  Hall            
+HallsRepository "1" *-[#595959,plain]-> "hallsRepository\n1" HallsRepository 
+Main             -[#595959,dashed]->  Presenter       
+Model           "1" *-[#595959,plain]-> "guest\n1" Guest           
+Model           "1" *-[#595959,plain]-> "guestProvider\n1" GuestProvider   
+Model           "1" *-[#595959,plain]-> "hallsProvider\n1" HallsProvider   
+Model           "1" *-[#595959,plain]-> "orderProvider\n1" OrderProvider   
+Model           "1" *-[#595959,plain]-> "tableProvider\n1" TableProvider   
+OrderProvider    -[#595959,dashed]->  Guest           
+OrderProvider    -[#595959,dashed]->  Order           
+OrderProvider   "1" *-[#595959,plain]-> "orderRepository\n1" OrderRepository 
+OrderRepository  -[#595959,dashed]->  Order           
+OrderRepository "1" *-[#595959,plain]-> "orderRepository\n1" OrderRepository 
+Presenter       "1" *-[#595959,plain]-> "consoleView\n1" ConsoleView     
+Presenter        -[#595959,dashed]->  Guest           
+Presenter        -[#595959,dashed]->  GuestProvider   
+Presenter        -[#595959,dashed]->  Hall            
+Presenter        -[#595959,dashed]->  HallsProvider   
+Presenter       "1" *-[#595959,plain]-> "model\n1" Model           
+Presenter        -[#595959,dashed]->  OrderProvider   
+Presenter        -[#595959,dashed]->  Table           
+Presenter        -[#595959,dashed]->  TableProvider   
+Table           "1" *-[#595959,plain]-> "guest\n1" Guest           
+Table            -[#595959,dashed]->  Hall            
+TableProvider    -[#595959,dashed]->  Guest           
+TableProvider    -[#595959,dashed]->  Table           
+TableProvider    -[#595959,dashed]->  TableProvider   
+TableProvider   "1" *-[#595959,plain]-> "tableRepository\n1" TableRepository 
+TableRepository  -[#595959,dashed]->  Table           
+TableRepository "1" *-[#595959,plain]-> "tableRepository\n1" TableRepository 
+@enduml
