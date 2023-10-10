@@ -1,26 +1,28 @@
 package Calculator;
 
 
+import org.assertj.core.util.VisibleForTesting;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
     public static void main(String[] args) {
         // Проверка базового функционала с целыми числами:
-        if (8 != Calculator.calculation(2, 6, '+')) {
-            throw new AssertionError("Ошибка в методе");
-        }
-
-        if (0 != Calculator.calculation(2, 2, '-')) {
-            throw new AssertionError("Ошибка в методе");
-        }
-
-        if (14 != Calculator.calculation(2, 7, '*')) {
-            throw new AssertionError("Ошибка в методе");
-        }
-
-        if (2 != Calculator.calculation(100, 50, '/')) {
-            throw new AssertionError("Ошибка в методе");
-        }
+//        if (8 != Calculator.calculation(2, 6, '+')) {
+//            throw new AssertionError("Ошибка в методе");
+//        }
+//
+//        if (0 != Calculator.calculation(2, 2, '-')) {
+//            throw new AssertionError("Ошибка в методе");
+//        }
+//
+//        if (14 != Calculator.calculation(2, 7, '*')) {
+//            throw new AssertionError("Ошибка в методе");
+//        }
+//
+//        if (2 != Calculator.calculation(100, 50, '/')) {
+//            throw new AssertionError("Ошибка в методе");
+//        }
 
         // Случаи с неправильными аргументами
         // аргумент operator типа char, должен вызывать исключение, если он получает не базовые символы (+-*/)
@@ -33,24 +35,24 @@ public class CalculatorTest {
         // }
 
         // Проверка базового функционала с целыми числами, с использованием утверждений:
-        assert 8 == Calculator.calculation(2, 6, '+');
-        assert 0 == Calculator.calculation(2, 2, '-');
-        assert 14 == Calculator.calculation(2, 7, '*');
-        assert 2 == Calculator.calculation(100, 50, '/');
+//        assert 8 == Calculator.calculation(2, 6, '+');
+//        assert 0 == Calculator.calculation(2, 2, '-');
+//        assert 14 == Calculator.calculation(2, 7, '*');
+//        assert 2 == Calculator.calculation(100, 50, '/');
 
         // Проверка базового функционала с целыми числами, с использованием утверждений AssertJ:
-//        assertThat(Calculator.calculation(2, 6, '+')).isEqualTo(8);
-//        assertThat(Calculator.calculation(2, 2, '-')).isEqualTo(0);
-//        assertThat(Calculator.calculation(2, 7, '*')).isEqualTo(14);
-//        assertThat(Calculator.calculation(100, 50, '/')).isEqualTo(2);
+        assertThat(Calculator.calculation(2, 6, '+')).isEqualTo(8);
+        assertThat(Calculator.calculation(2, 2, '-')).isEqualTo(0);
+        assertThat(Calculator.calculation(2, 7, '*')).isEqualTo(14);
+        assertThat(Calculator.calculation(100, 50, '/')).isEqualTo(2);
 
         // Проверка ожидаемого исключения, с использованием утверждений AssertJ:
-//        assertThatThrownBy(() ->
-//                Calculator.calculation(8, 4, '_')
-//        ).isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(() ->
+                Calculator.calculation(8, 4, '_')
+        ).isInstanceOf(IllegalStateException.class);
 
-        System.out.println(Calculator.calculation(2_147_483_647, 1, '+')); // integer overflow
-        System.out.println(Calculator.squareRootExtraction(169));
+//        System.out.println(Calculator.calculation(2_147_483_647, 1, '+')); // integer overflow
+//        System.out.println(Calculator.squareRootExtraction(169));
 
         // Примерные решения домашних заданий из 1 лекции:
 
@@ -72,5 +74,23 @@ public class CalculatorTest {
         // }
         //   assert 0 == seminars.first.Calculator.Calculator.calculation(2, 6, '+');
         //    assertThat(seminars.first.Calculator.Calculator.calculation(2, 6, '+')).isEqualTo(0);
+
+        /**
+         * Проверка метода calculateDiscount().
+         */
+        // проверка на нормальных данных
+        assertThat(Calculator.calculateDiscount(100,100)).isEqualTo(0.0);
+        assertThat(Calculator.calculateDiscount(100,50)).isEqualTo(50.0);
+        assertThat(Calculator.calculateDiscount(100,0)).isEqualTo(100.0);
+
+        //Проверка при отрицательной начальной цене
+        assertThatThrownBy(()->Calculator.calculateDiscount(-1, 10)).isInstanceOf(RuntimeException.class);
+        // Проверка при нулевой начальной цене
+        assertThatThrownBy(()->Calculator.calculateDiscount(0, 10)).isInstanceOf(RuntimeException.class);
+        // Проверка, если скидка отрицательная
+        assertThatThrownBy(()->Calculator.calculateDiscount(100, -10)).isInstanceOf(RuntimeException.class);
+        // Проверка если скидка более 100%
+        assertThatThrownBy(()->Calculator.calculateDiscount(100, 101)).isInstanceOf(RuntimeException.class);
+
     }
 }

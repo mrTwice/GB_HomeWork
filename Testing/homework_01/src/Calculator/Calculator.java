@@ -45,6 +45,10 @@ public class Calculator {
     public static double calculateDiscount(double purchaseAmount, int discountAmount) {
         // purchaseAmount - сумма покупки
         // discountAmount - размер скидки
-        return 0; // Метод должен возвращать сумму покупки со скидкой
+        if (purchaseAmount <= 0)
+            throw new RuntimeException("Сумма покупки до применения скидки не может быть меньше или равной нулю.");
+        if (discountAmount < 0 || discountAmount > 100)
+            throw new RuntimeException("Размер скидки должен быть в диапазоне [0,100]");
+        return purchaseAmount-(purchaseAmount* discountAmount/100); // Метод должен возвращать сумму покупки со скидкой
     }
 }
