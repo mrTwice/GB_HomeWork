@@ -3,12 +3,12 @@ package Base;
 import java.util.List;
 
 
-public class Actions implements AverageMean {
-    @Override
+public class Actions {
     public double AverageMean(List<Integer> list) {
-        if(list == null || list.isEmpty())
+        if(list == null || list.isEmpty() || list.contains(null))
             throw new RuntimeException("Список пуст!");
-        double averageMean = list.stream().mapToInt(Integer::intValue).sum()/list.size();
+        double average = list.stream().mapToInt(Integer::intValue).sum();
+        double averageMean = average/list.size();
         return averageMean;
     }
 }
