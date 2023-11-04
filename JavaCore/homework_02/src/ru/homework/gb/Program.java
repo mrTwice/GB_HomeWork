@@ -218,6 +218,17 @@ public class Program {
         return false;
     }
 
+    private static boolean universalCheckWinForBot(char dot) {
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (firsDiagonalForBot(y, x, dot) || secondDiagonalForBot(y, x, dot)
+                        || horizontalForBot(y, x, dot) || verticalForBot(y, x, dot))
+                    return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Метод для бота, который позволяет делать ход с учетом возможной победы пользователя на следующем ходу
      * @param dot
@@ -229,7 +240,7 @@ public class Program {
             for (int x = 0; x < fieldSizeX; x++) {
                 if(isCellEmpty(x,y)) {
                     field[y][x] = dot;
-                    if (universalCheckWin(dot)) {
+                    if (universalCheckWinForBot(dot) || universalCheckWin(dot)) {
                         answer[0] = y;
                         answer[1] = x;
                     }
@@ -261,6 +272,19 @@ public class Program {
         return false;
     }
 
+    private static boolean firsDiagonalForBot(int y, int x, char dot) {
+        int newWinCount = WIN_COUNT - 1;
+        try {
+            if (field[y][x] == dot
+                    && field[y + (newWinCount - 2)][x + (newWinCount - 2)] == dot
+                    && field[y + (newWinCount - 1)][x + (newWinCount - 1)] == dot)
+                return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return false;
+    }
+
     /**
      * Метод проверки победной комбинации по второй диагонали
      *
@@ -275,6 +299,19 @@ public class Program {
                     && field[y + (WIN_COUNT - 3)][x - (WIN_COUNT - 3)] == dot
                     && field[y + (WIN_COUNT - 2)][x - (WIN_COUNT - 2)] == dot
                     && field[y + (WIN_COUNT - 1)][x - (WIN_COUNT - 1)] == dot)
+                return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return false;
+    }
+
+    private static boolean secondDiagonalForBot(int y, int x, char dot) {
+        int newWinCount = WIN_COUNT - 1;
+        try {
+            if (field[y][x] == dot
+                    && field[y + (newWinCount - 2)][x - (newWinCount - 2)] == dot
+                    && field[y + (newWinCount - 1)][x - (newWinCount - 1)] == dot)
                 return true;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
@@ -303,6 +340,19 @@ public class Program {
         return false;
     }
 
+    private static boolean horizontalForBot(int y, int x, char dot) {
+        int newWinCount = WIN_COUNT - 1;
+        try {
+            if (field[y][x] == dot
+                    && field[y][x + (newWinCount - 2)] == dot
+                    && field[y][x + (newWinCount - 1)] == dot)
+                return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return false;
+    }
+
     /**
      * Метод проверки победной комбинации по вертикали
      *
@@ -317,6 +367,19 @@ public class Program {
                     && field[y + (WIN_COUNT - 3)][x] == dot
                     && field[y + (WIN_COUNT - 2)][x] == dot
                     && field[y + (WIN_COUNT - 1)][x] == dot)
+                return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return false;
+    }
+
+    private static boolean verticalForBot(int y, int x, char dot) {
+        int newWinCount = WIN_COUNT - 1;
+        try {
+            if (field[y][x] == dot
+                    && field[y + (newWinCount - 2)][x] == dot
+                    && field[y + (newWinCount - 1)][x] == dot)
                 return true;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
