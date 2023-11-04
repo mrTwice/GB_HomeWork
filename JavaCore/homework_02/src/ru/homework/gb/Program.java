@@ -101,10 +101,14 @@ public class Program {
      */
     private static void aiTurn() {
         int x, y;
-        int[] bestSolution = checkHumansMoves(DOT_HUMAN);
-        if(bestSolution[0] != -1 && bestSolution[1] != -1){
-            y = bestSolution[0];
-            x = bestSolution[1];
+        int[] antiWin = checkHumansMoves(DOT_HUMAN);
+        int[] warning = checkHumansMovesThreeDot(DOT_HUMAN);
+        if(antiWin[0] != -1 && antiWin[1] != -1){
+            y = antiWin[0];
+            x = antiWin[1];
+        } else if (warning[0] != -1 && warning[1] != -1) {
+            y = warning[0];
+            x = warning[1];
         } else {
             do {
                 x = random.nextInt(fieldSizeX);
@@ -234,13 +238,30 @@ public class Program {
      * @param dot
      * @return массив с координатами лушего хода
      */
+    private static int[] checkHumansMovesThreeDot(char dot) {
+        int[] answer = {-1, -1};
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if(isCellEmpty(x,y)) {
+                    field[y][x] = dot;
+                    if (universalCheckWinForBot(dot)) {
+                        answer[0] = y;
+                        answer[1] = x;
+                    }
+                    field[y][x] = DOT_EMPTY;
+                }
+            }
+        }
+        return answer;
+    }
+
     private static int[] checkHumansMoves(char dot) {
         int[] answer = {-1, -1};
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
                 if(isCellEmpty(x,y)) {
                     field[y][x] = dot;
-                    if (universalCheckWinForBot(dot) || universalCheckWin(dot)) {
+                    if (universalCheckWin(dot)) {
                         answer[0] = y;
                         answer[1] = x;
                     }
