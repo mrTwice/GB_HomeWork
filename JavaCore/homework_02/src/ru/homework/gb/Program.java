@@ -223,7 +223,7 @@ public class Program {
      * @param dot
      * @return массив с координатами лушего хода
      */
-    private static int [] checkHumansMoves(char dot) {
+    private static int[] checkHumansMoves(char dot) {
         int[] answer = {-1, -1};
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
