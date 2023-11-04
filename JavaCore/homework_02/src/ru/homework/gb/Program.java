@@ -106,7 +106,7 @@ public class Program {
     private static void aiTurn() {
         int x, y;
         int[] antiWin = checkHumansMoves(DOT_HUMAN);
-        int[] warning = checkHumansMovesThreeDot(DOT_HUMAN);
+        int[] warning = checkPrevention(DOT_HUMAN);
         if(antiWin[0] != -1 && antiWin[1] != -1){
             y = antiWin[0];
             x = antiWin[1];
@@ -155,7 +155,7 @@ public class Program {
      * @return признак завершения игры (true)
      */
     private static boolean gameCheck(char dot, String winStr) {
-        if (universalCheckWin(dot)) {
+        if (isWin(dot)) {
             System.out.println(winStr);
             return true;
         }
@@ -189,7 +189,7 @@ public class Program {
      * @param dot
      * @return
      */
-    private static boolean universalCheckWin(char dot) {
+    private static boolean isWin(char dot) {
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
                 if (firsDiagonal(y, x, dot) || secondDiagonal(y, x, dot)
@@ -205,7 +205,7 @@ public class Program {
      * @param dot
      * @return
      */
-    private static boolean universalCheckWinForBot(char dot) {
+    private static boolean findWinPlayersCombination(char dot) {
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
                 if (firsDiagonalForBot(y, x, dot) || secondDiagonalForBot(y, x, dot)
@@ -221,13 +221,13 @@ public class Program {
      * @param dot
      * @return массив с координатами лушего хода
      */
-    private static int[] checkHumansMovesThreeDot(char dot) {
+    private static int[] checkPrevention(char dot) {
         int[] answer = {-1, -1};
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
                 if(isCellEmpty(x,y)) {
                     field[y][x] = dot;
-                    if (universalCheckWinForBot(dot)) {
+                    if (findWinPlayersCombination(dot)) {
                         answer[0] = y;
                         answer[1] = x;
                     }
@@ -244,7 +244,7 @@ public class Program {
             for (int x = 0; x < fieldSizeX; x++) {
                 if(isCellEmpty(x,y)) {
                     field[y][x] = dot;
-                    if (universalCheckWin(dot)) {
+                    if (isWin(dot)) {
                         answer[0] = y;
                         answer[1] = x;
                     }
