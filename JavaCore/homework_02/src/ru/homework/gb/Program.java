@@ -1,7 +1,5 @@
 package ru.homework.gb;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -103,10 +101,10 @@ public class Program {
      */
     private static void aiTurn() {
         int x, y;
-        int[] human = humanCheckForAi(DOT_HUMAN);
-        if(human[0] != -1 && human[1] != -1){
-            y = human[0];
-            x = human[1];
+        int[] bestSolution = checkHumansMoves(DOT_HUMAN);
+        if(bestSolution[0] != -1 && bestSolution[1] != -1){
+            y = bestSolution[0];
+            x = bestSolution[1];
         } else {
             do {
                 x = random.nextInt(fieldSizeX);
@@ -149,7 +147,7 @@ public class Program {
      * @return признак завершения игры (true)
      */
     private static boolean gameCheck(char dot, String winStr) {
-        if (universalCheck(dot)) {
+        if (universalCheckWin(dot)) {
             System.out.println(winStr);
             return true;
         }
@@ -209,7 +207,7 @@ public class Program {
      * @param dot
      * @return
      */
-    private static boolean universalCheck(char dot) {
+    private static boolean universalCheckWin(char dot) {
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
                 if (firsDiagonal(y, x, dot) || secondDiagonal(y, x, dot)
@@ -220,21 +218,26 @@ public class Program {
         return false;
     }
 
-    private static int [] humanCheckForAi(char dot) {
-        int[] yx = {-1, -1};
+    /**
+     * Метод для бота, который позволяет делать ход с учетом возможной победы пользователя на следующем ходу
+     * @param dot
+     * @return массив с координатами лушего хода
+     */
+    private static int [] checkHumansMoves(char dot) {
+        int[] answer = {-1, -1};
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
                 if(isCellEmpty(x,y)) {
                     field[y][x] = dot;
-                    if (universalCheck(dot)) {
-                        yx[0] = y;
-                        yx[1] = x;
+                    if (universalCheckWin(dot)) {
+                        answer[0] = y;
+                        answer[1] = x;
                     }
                     field[y][x] = DOT_EMPTY;
                 }
             }
         }
-        return yx;
+        return answer;
     }
 
     /**
