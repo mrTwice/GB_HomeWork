@@ -184,32 +184,6 @@ public class Program {
     }
 
     /**
-     * TODO: 2. Переработать в рамках домашней работы, метод должен быть универсальным
-     * Проверка победы
-     *
-     * @param dot фишка игрока (X или 0)
-     * @return
-     */
-    private static boolean checkWin(char dot) {
-
-        // Проверка по трем горизонталям
-        if (field[0][0] == dot && field[0][1] == dot && field[0][2] == dot) return true;
-        if (field[1][0] == dot && field[1][1] == dot && field[1][2] == dot) return true;
-        if (field[2][0] == dot && field[2][1] == dot && field[2][2] == dot) return true;
-
-        // Проверка по трем вертикалям
-        if (field[0][0] == dot && field[1][0] == dot && field[2][0] == dot) return true;
-        if (field[0][1] == dot && field[1][1] == dot && field[2][1] == dot) return true;
-        if (field[0][2] == dot && field[1][2] == dot && field[2][2] == dot) return true;
-
-        // Проверка по двум диагоналям
-        if (field[0][0] == dot && field[1][1] == dot && field[2][2] == dot) return true;
-        if (field[0][2] == dot && field[1][1] == dot && field[2][0] == dot) return true;
-
-        return false;
-    }
-
-    /**
      * Универсальный метод для проверки победных комбинаций.
      *
      * @param dot
