@@ -98,6 +98,10 @@ public class Program {
     /**
      * TODO: 3. Компьютер должен мешать игроку
      * Ход игрока (компьютер)
+     * antiWin хранит результаты следующего хода, если на нем игрок сможет победить
+     *
+     * warming хранит первый попавшийся ход, который может помешаать игроку сыграть, если не победной комбинации
+     * на следующем ходу
      */
     private static void aiTurn() {
         int x, y;
@@ -222,6 +226,11 @@ public class Program {
         return false;
     }
 
+    /**
+     * Поиск предпобедных комбинаций игрока. Будет выбрана первая попавшаяся
+     * @param dot
+     * @return
+     */
     private static boolean universalCheckWinForBot(char dot) {
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
@@ -293,6 +302,15 @@ public class Program {
         return false;
     }
 
+
+    /**
+     * Метод проверки победной комбинации по первой диагонали для поиска предпобедной комбинации
+     *
+     * @param y   координата X
+     * @param x   Координата Y
+     * @param dot Символ игрока
+     * @return True/False
+     */
     private static boolean firsDiagonalForBot(int y, int x, char dot) {
         int newWinCount = WIN_COUNT - 1;
         try {
@@ -327,6 +345,14 @@ public class Program {
         return false;
     }
 
+    /**
+     * Метод проверки победной комбинации по второй диагонали для поиска предпобедной комбинации
+     *
+     * @param y   координата X
+     * @param x   Координата Y
+     * @param dot Символ игрока
+     * @return True/False
+     */
     private static boolean secondDiagonalForBot(int y, int x, char dot) {
         int newWinCount = WIN_COUNT - 1;
         try {
@@ -361,6 +387,14 @@ public class Program {
         return false;
     }
 
+    /**
+     * Метод проверки победной комбинации по горизонтали для поиска предпобедной комбинации
+     *
+     * @param y   координата X
+     * @param x   Координата Y
+     * @param dot Символ игрока
+     * @return True/False
+     */
     private static boolean horizontalForBot(int y, int x, char dot) {
         int newWinCount = WIN_COUNT - 1;
         try {
@@ -395,6 +429,14 @@ public class Program {
         return false;
     }
 
+    /**
+     * Метод проверки победной комбинации по вертикали для поиска предпобедной комбинации
+     *
+     * @param y   координата X
+     * @param x   Координата Y
+     * @param dot Символ игрока
+     * @return True/False
+     */
     private static boolean verticalForBot(int y, int x, char dot) {
         int newWinCount = WIN_COUNT - 1;
         try {
