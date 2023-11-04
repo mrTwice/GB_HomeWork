@@ -1,5 +1,7 @@
 package ru.homework.gb;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -100,15 +102,21 @@ public class Program {
      * Ход игрока (компьютер)
      */
     private static void aiTurn() {
-
-
         int x, y;
-        do {
-            x = random.nextInt(fieldSizeX);
-            y = random.nextInt(fieldSizeY);
+        int[] human = humanCheckForAi(DOT_HUMAN);
+        if(human[0] != -1 && human[1] != -1){
+            y = human[0];
+            x = human[1];
+        } else {
+            do {
+                x = random.nextInt(fieldSizeX);
+                y = random.nextInt(fieldSizeY);
+            }
+            while (!isCellEmpty(x, y));
         }
-        while (!isCellEmpty(x, y));
         field[y][x] = DOT_AI;
+
+
     }
 
     /**
@@ -197,35 +205,54 @@ public class Program {
 
     /**
      * Универсальный метод для проверки победных комбинаций.
+     *
      * @param dot
      * @return
      */
     private static boolean universalCheck(char dot) {
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
-                    if(firsDiagonal(y,x,dot) || secondDiagonal(y,x,dot)
-                            || horizontal(y,x,dot) || vertical(y,x,dot))
-                        return true;
+                if (firsDiagonal(y, x, dot) || secondDiagonal(y, x, dot)
+                        || horizontal(y, x, dot) || vertical(y, x, dot))
+                    return true;
             }
         }
         return false;
     }
 
+    private static int [] humanCheckForAi(char dot) {
+        int[] yx = {-1, -1};
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if(isCellEmpty(x,y)) {
+                    field[y][x] = dot;
+                    if (universalCheck(dot)) {
+                        yx[0] = y;
+                        yx[1] = x;
+                    }
+                    field[y][x] = DOT_EMPTY;
+                }
+            }
+        }
+        return yx;
+    }
+
     /**
      * Метод проверки победной комбинации по первой диагонали
-     * @param y координата X
-     * @param x Координата Y
+     *
+     * @param y   координата X
+     * @param x   Координата Y
      * @param dot Символ игрока
      * @return True/False
      */
-    private static boolean firsDiagonal(int y, int x ,char dot){
+    private static boolean firsDiagonal(int y, int x, char dot) {
         try {
             if (field[y][x] == dot
                     && field[y + (WIN_COUNT - 3)][x + (WIN_COUNT - 3)] == dot
                     && field[y + (WIN_COUNT - 2)][x + (WIN_COUNT - 2)] == dot
                     && field[y + (WIN_COUNT - 1)][x + (WIN_COUNT - 1)] == dot)
                 return true;
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
         return false;
@@ -233,19 +260,20 @@ public class Program {
 
     /**
      * Метод проверки победной комбинации по второй диагонали
-     * @param y координата X
-     * @param x Координата Y
+     *
+     * @param y   координата X
+     * @param x   Координата Y
      * @param dot Символ игрока
      * @return True/False
      */
-    private static boolean secondDiagonal(int y, int x, char dot){
+    private static boolean secondDiagonal(int y, int x, char dot) {
         try {
             if (field[y][x] == dot
                     && field[y + (WIN_COUNT - 3)][x - (WIN_COUNT - 3)] == dot
                     && field[y + (WIN_COUNT - 2)][x - (WIN_COUNT - 2)] == dot
                     && field[y + (WIN_COUNT - 1)][x - (WIN_COUNT - 1)] == dot)
                 return true;
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
         return false;
@@ -253,19 +281,20 @@ public class Program {
 
     /**
      * Метод проверки победной комбинации по горизонтали
-     * @param y координата X
-     * @param x Координата Y
+     *
+     * @param y   координата X
+     * @param x   Координата Y
      * @param dot Символ игрока
      * @return True/False
      */
-    private static boolean horizontal(int y, int x, char dot){
+    private static boolean horizontal(int y, int x, char dot) {
         try {
             if (field[y][x] == dot
                     && field[y][x + (WIN_COUNT - 3)] == dot
                     && field[y][x + (WIN_COUNT - 2)] == dot
                     && field[y][x + (WIN_COUNT - 1)] == dot)
                 return true;
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
         return false;
@@ -273,24 +302,24 @@ public class Program {
 
     /**
      * Метод проверки победной комбинации по вертикали
-     * @param y координата X
-     * @param x Координата Y
+     *
+     * @param y   координата X
+     * @param x   Координата Y
      * @param dot Символ игрока
      * @return True/False
      */
-    private static boolean vertical(int y, int x ,char dot){
+    private static boolean vertical(int y, int x, char dot) {
         try {
             if (field[y][x] == dot
                     && field[y + (WIN_COUNT - 3)][x] == dot
                     && field[y + (WIN_COUNT - 2)][x] == dot
                     && field[y + (WIN_COUNT - 1)][x] == dot)
                 return true;
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
         return false;
     }
-
 
 
 }
