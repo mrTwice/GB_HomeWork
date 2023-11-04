@@ -21,10 +21,10 @@ public class Program {
 
 
     public static void main(String[] args) {
-        while (true){
+        while (true) {
             initField();
             printField();
-            while (true){
+            while (true) {
                 humanTurn();
                 printField();
                 if (gameCheck(DOT_HUMAN, "Вы победили!"))
@@ -43,13 +43,13 @@ public class Program {
     /**
      * Инициализация игрового поля
      */
-    private static void initField(){
-        fieldSizeX = 3;
-        fieldSizeY = 3;
+    private static void initField() {
+        fieldSizeX = 5;
+        fieldSizeY = 5;
 
         field = new char[fieldSizeY][fieldSizeX];
-        for (int y = 0; y < fieldSizeY; y++){
-            for (int x = 0; x < fieldSizeX; x++){
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
                 field[y][x] = DOT_EMPTY;
             }
         }
@@ -58,22 +58,22 @@ public class Program {
     /**
      * Распечатать игровое поле
      */
-    private static void printField(){
+    private static void printField() {
         System.out.print("+");
-        for (int i = 0; i < fieldSizeX; i++){
-            System.out.print("-" + (i + 1));
+        for (int i = 0; i < fieldSizeX; i++) {
+            System.out.print("-" + (i));
         }
         System.out.println("-");
 
-        for (int y = 0; y < fieldSizeY; y++){
-            System.out.print((y + 1) + "|");
-            for (int x = 0; x < fieldSizeX; x++){
+        for (int y = 0; y < fieldSizeY; y++) {
+            System.out.print((y) + "|");
+            for (int x = 0; x < fieldSizeX; x++) {
                 System.out.print(field[y][x] + "|");
             }
             System.out.println();
         }
 
-        for (int i = 0; i < fieldSizeX*2 + 2; i++){
+        for (int i = 0; i < fieldSizeX * 2 + 2; i++) {
             System.out.print("-");
         }
         System.out.println();
@@ -82,30 +82,29 @@ public class Program {
     /**
      * Ход игрока (человека)
      */
-    private static void humanTurn(){
+    private static void humanTurn() {
         int x, y;
 
         do {
             System.out.print("Введите координаты хода X и Y\n(от 1 до 3) через пробел >>> ");
-            x = scanner.nextInt() - 1;
-            y = scanner.nextInt() - 1;
+            x = scanner.nextInt();
+            y = scanner.nextInt();
         }
         while (!isCellValid(x, y) || !isCellEmpty(x, y));
         field[y][x] = DOT_HUMAN;
 
     }
 
-    /** TODO: 3. Компьютер должен мешать игроку
+    /**
+     * TODO: 3. Компьютер должен мешать игроку
      * Ход игрока (компьютер)
      */
-    private static void aiTurn(){
-
-
+    private static void aiTurn() {
 
 
         int x, y;
         do {
-           x = random.nextInt(fieldSizeX);
+            x = random.nextInt(fieldSizeX);
             y = random.nextInt(fieldSizeY);
         }
         while (!isCellEmpty(x, y));
@@ -114,37 +113,40 @@ public class Program {
 
     /**
      * Проверка, является ли ячейка игрового поля пустой
+     *
      * @param x
      * @param y
      * @return
      */
-    private static boolean isCellEmpty(int x, int y){
+    private static boolean isCellEmpty(int x, int y) {
         return field[y][x] == DOT_EMPTY;
     }
 
     /**
      * Проверка корректности координат хода
+     *
      * @param x
      * @param y
      * @return
      */
-    private static boolean isCellValid(int x, int y){
+    private static boolean isCellValid(int x, int y) {
         return x >= 0 && x < fieldSizeX && y >= 0 && y < fieldSizeY;
     }
 
     /**
      * Метод проверки состояния игры
-     * @param dot фишка игрока
+     *
+     * @param dot    фишка игрока
      * @param winStr победный слоган
      * @return признак завершения игры (true)
      */
-    private static boolean gameCheck(char dot, String winStr){
-        if (checkWin(dot)){
+    private static boolean gameCheck(char dot, String winStr) {
+        if (universalCheck(dot)) {
             System.out.println(winStr);
             return true;
         }
 
-        if (checkDraw()){
+        if (checkDraw()) {
             System.out.println("Ничья!");
             return true;
         }
@@ -154,11 +156,12 @@ public class Program {
 
     /**
      * Проверка на ничью (все ячейки игрового поля заполнены)
+     *
      * @return
      */
-    private static boolean checkDraw(){
-        for (int y = 0; y < fieldSizeY; y++){
-            for (int x = 0; x < fieldSizeX; x++){
+    private static boolean checkDraw() {
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
                 if (isCellEmpty(x, y))
                     return false;
             }
@@ -169,10 +172,11 @@ public class Program {
     /**
      * TODO: 2. Переработать в рамках домашней работы, метод должен быть универсальным
      * Проверка победы
+     *
      * @param dot фишка игрока (X или 0)
      * @return
      */
-    private static boolean checkWin(char dot){
+    private static boolean checkWin(char dot) {
 
         // Проверка по трем горизонталям
         if (field[0][0] == dot && field[0][1] == dot && field[0][2] == dot) return true;
@@ -191,10 +195,101 @@ public class Program {
         return false;
     }
 
-    private boolean check1(int x, int y, char dot, int winCount){
+    /**
+     * Универсальный метод для проверки победных комбинаций.
+     * @param dot
+     * @return
+     */
+    private static boolean universalCheck(char dot) {
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                    if(firsDiagonal(y,x,dot) || secondDiagonal(y,x,dot)
+                            || horizontal(y,x,dot) || vertical(y,x,dot))
+                        return true;
+            }
+        }
         return false;
     }
 
+    /**
+     * Метод проверки победной комбинации по первой диагонали
+     * @param y координата X
+     * @param x Координата Y
+     * @param dot Символ игрока
+     * @return True/False
+     */
+    private static boolean firsDiagonal(int y, int x ,char dot){
+        try {
+            if (field[y][x] == dot
+                    && field[y + (WIN_COUNT - 3)][x + (WIN_COUNT - 3)] == dot
+                    && field[y + (WIN_COUNT - 2)][x + (WIN_COUNT - 2)] == dot
+                    && field[y + (WIN_COUNT - 1)][x + (WIN_COUNT - 1)] == dot)
+                return true;
+        }catch (ArrayIndexOutOfBoundsException e){
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Метод проверки победной комбинации по второй диагонали
+     * @param y координата X
+     * @param x Координата Y
+     * @param dot Символ игрока
+     * @return True/False
+     */
+    private static boolean secondDiagonal(int y, int x, char dot){
+        try {
+            if (field[y][x] == dot
+                    && field[y + (WIN_COUNT - 3)][x - (WIN_COUNT - 3)] == dot
+                    && field[y + (WIN_COUNT - 2)][x - (WIN_COUNT - 2)] == dot
+                    && field[y + (WIN_COUNT - 1)][x - (WIN_COUNT - 1)] == dot)
+                return true;
+        }catch (ArrayIndexOutOfBoundsException e){
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Метод проверки победной комбинации по горизонтали
+     * @param y координата X
+     * @param x Координата Y
+     * @param dot Символ игрока
+     * @return True/False
+     */
+    private static boolean horizontal(int y, int x, char dot){
+        try {
+            if (field[y][x] == dot
+                    && field[y][x + (WIN_COUNT - 3)] == dot
+                    && field[y][x + (WIN_COUNT - 2)] == dot
+                    && field[y][x + (WIN_COUNT - 1)] == dot)
+                return true;
+        }catch (ArrayIndexOutOfBoundsException e){
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Метод проверки победной комбинации по вертикали
+     * @param y координата X
+     * @param x Координата Y
+     * @param dot Символ игрока
+     * @return True/False
+     */
+    private static boolean vertical(int y, int x ,char dot){
+        try {
+            if (field[y][x] == dot
+                    && field[y + (WIN_COUNT - 3)][x] == dot
+                    && field[y + (WIN_COUNT - 2)][x] == dot
+                    && field[y + (WIN_COUNT - 1)][x] == dot)
+                return true;
+        }catch (ArrayIndexOutOfBoundsException e){
+            return false;
+        }
+        return false;
+    }
 
 
 
