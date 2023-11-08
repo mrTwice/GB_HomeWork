@@ -8,6 +8,17 @@ public class Worker extends Employee{
         this.salary = salary;
     }
 
+    /**
+     * Последовал примеру на семинар, и использовал данный метод, для того, чтобы можно было организтвать проверку полей до создания объекта.
+     * Какую-то логику тут реализовывать не стал, потмоу как цель домашней работы была в другом.
+     * @param firstName
+     * @param lastNane
+     * @param birthdayDate
+     * @param phoneNumber
+     * @param salary
+     * @param position
+     * @return
+     */
     public static Worker createWorker(String firstName, String lastNane, String birthdayDate, String phoneNumber, double salary, String position){
         if(firstName == null)
             throw new RuntimeException("Имя введено не корректно");
@@ -25,6 +36,10 @@ public class Worker extends Employee{
         return new Worker(firstName, lastNane, birthdayDate, phoneNumber, salary, position);
     }
 
+    /**
+     * Реализация метода абстрактного класса-родителя
+     * @return
+     */
     @Override
     public double getAverageSalary(){
         return salary;

@@ -3,6 +3,12 @@ package Base;
 import java.util.*;
 import java.util.function.Consumer;
 
+/**
+ * Была цель реализовать интерфейс Iterable, с тем чтобы поработать с ним, и немного разобраться с внутренней кухней.
+ * Поэтому пошел по относительно простому пути.
+ * @param <Employee>
+ */
+
 public class EmployeesList<Employee> implements Iterable<Employee>{
 
     private List<Employee> employeeList;
