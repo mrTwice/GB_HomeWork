@@ -19,7 +19,7 @@ public abstract class Employee implements Comparable<Employee> {
     private String position;
 
     protected Employee(String firstName, String lastNane, String birthdayDate, String phoneNumber, String position) {
-        this.id = count.incrementAndGet();;
+        this.id = count.incrementAndGet();
         this.firstName = firstName;
         this.lastName = lastNane;
         this.birthdayDate = birthdayDate;
