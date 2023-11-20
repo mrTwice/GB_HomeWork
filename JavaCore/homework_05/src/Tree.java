@@ -26,16 +26,13 @@ public class Tree {
         if (files == null)
             return;
 
-        int subDirTotal = 0;
-        for(int i = 0; i < files.length; i++){
-            if (files[i].isDirectory())
-                subDirTotal++;
-        }
-
-        int subDirCounter = 0;
+        int totalObjects = files.length;
+        int objectCounter = 0;
         for(int i = 0; i < files.length; i++){
             if (files[i].isDirectory()){
-                print(files[i], indent, subDirTotal  == ++subDirCounter);
+                print(files[i], indent, totalObjects  == ++objectCounter);
+            } else {
+                print(files[i], indent, totalObjects  == ++objectCounter);
             }
         }
     }
