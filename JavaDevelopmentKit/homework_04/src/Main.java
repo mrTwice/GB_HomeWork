@@ -10,7 +10,7 @@ public class Main {
         company.printEmployees();
 
         System.out.println(company.findEmployeeByExp(5));
-        System.out.println(company.findEmployeePhoneNumberByName("Иван").);
+        System.out.println(company.findEmployeePhoneNumberByName("Иван"));
         System.out.println(company.findEmployeeByPersonnelNumber(4));
 
     }
