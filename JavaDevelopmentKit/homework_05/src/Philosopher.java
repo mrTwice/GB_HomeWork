@@ -5,10 +5,11 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Philosopher implements Runnable{
+    private final int EAT_COUNT = 3;
     private final int TIME_FOR_EAT = 500;
     private final int TIME_FOR_THINKING = 1000;
     private Semaphore semaphore;
-    private int count = 5;
+    private int count = EAT_COUNT;
     private Forks forks;
     private Fork left;
     private Fork right;
@@ -46,8 +47,8 @@ public class Philosopher implements Runnable{
                 throw new RuntimeException(e);
             }
             count--;
+            System.out.println(Thread.currentThread().getName() + " покушал " + (EAT_COUNT - count) + " раз");
         }
-        System.out.println(Thread.currentThread().getName() + " покушал 5 раз");
 
 
     }
