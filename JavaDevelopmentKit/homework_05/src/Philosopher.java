@@ -1,8 +1,6 @@
-import java.util.Deque;
+
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Philosopher implements Runnable{
     private final int EAT_COUNT = 3;
