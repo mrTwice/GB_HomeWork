@@ -6,6 +6,7 @@ import SeminarTask_02.Interfaces.Thing;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 
 /**
  * Корзина
@@ -39,53 +40,10 @@ public class Cart<T extends Food> {
 
     public void cardBalancing()
     {
-        foodstuffs.stream()
-                .filter(Food::getProteins)
-                .findFirst()
-                .ifPresentOrElse(
-                        food -> {
-                            System.out.println("Продукты с протеинами уже есть в корзине.");
-                        },
-                        () -> {
-                            System.out.println("Продуктов с протеинами в корзине нет. Сейчас добавим.");
-                            market.getThings(clazz).stream()
-                                .filter(Food::getProteins)
-                                .findFirst()
-                                .map(foodstuffs::add);
-                        }
-                );
 
-        foodstuffs.stream()
-                .filter(Food::getCarbohydrates)
-                .findFirst()
-                .ifPresentOrElse(
-                        food -> {
-                            System.out.println("Продукты с углеводами уже есть в корзине.");
-                        },
-                        () -> {
-                            System.out.println("Продуктов с углеводами в корзине нет. Сейчас добавим.");
-                            market.getThings(clazz).stream()
-                                    .filter(Food::getCarbohydrates)
-                                    .findFirst()
-                                    .map(foodstuffs::add);
-                        }
-                );
-
-        foodstuffs.stream()
-                .filter(Food::getFats)
-                .findFirst()
-                .ifPresentOrElse(
-                        food -> {
-                            System.out.println("Продукты с жирами уже есть в корзине.");
-                        },
-                        () -> {
-                            System.out.println("Продуктов с жирами в корзине нет. Сейчас добавим.");
-                            market.getThings(clazz).stream()
-                                    .filter(Food::getFats)
-                                    .findFirst()
-                                    .map(foodstuffs::add);
-                        }
-                );
+        getFoodForCart(Food::getProteins, "протеинами");
+        getFoodForCart(Food::getCarbohydrates, "углеводами");
+        getFoodForCart(Food::getFats, "жирами");
 
         if (foodstuffs.stream().anyMatch(Food::getProteins)
                 && foodstuffs.stream().anyMatch(Food::getFats)
@@ -118,5 +76,23 @@ public class Cart<T extends Food> {
                 food.getProteins() ? "Да" : "Нет",
                 food.getFats() ? "Да" : "Нет",
                 food.getCarbohydrates() ? "Да" : "Нет"));
+    }
+
+    public void getFoodForCart(Predicate<Food> predicate, String message){
+        foodstuffs.stream()
+                .filter(predicate)
+                .findFirst()
+                .ifPresentOrElse(
+                        food -> {
+                            System.out.println("Продукты с "+ message +" уже есть в корзине.");
+                        },
+                        () -> {
+                            System.out.println("Продуктов с "+ message +" в корзине нет. Сейчас добавим.");
+                            market.getThings(clazz).stream()
+                                    .filter(predicate)
+                                    .findFirst()
+                                    .map(foodstuffs::add);
+                        }
+                );
     }
 }
