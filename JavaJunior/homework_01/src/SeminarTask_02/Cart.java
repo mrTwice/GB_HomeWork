@@ -78,7 +78,7 @@ public class Cart<T extends Food> {
                 food.getCarbohydrates() ? "Да" : "Нет"));
     }
 
-    public void getFoodForCart(Predicate<Food> predicate, String message){
+    private void getFoodForCart(Predicate<Food> predicate, String message){
         foodstuffs.stream()
                 .filter(predicate)
                 .findFirst()
