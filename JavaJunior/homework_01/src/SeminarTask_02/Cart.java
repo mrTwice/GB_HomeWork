@@ -44,10 +44,10 @@ public class Cart<T extends Food> {
                 .findFirst()
                 .ifPresentOrElse(
                         food -> {
-                            System.out.println("Продукты с протеинами уже есть в корзине.\n");
+                            System.out.println("Продукты с протеинами уже есть в корзине.");
                         },
                         () -> {
-                            System.out.println("Продуктов с протеинами в корзине нет. Сейчас добавим.\n");
+                            System.out.println("Продуктов с протеинами в корзине нет. Сейчас добавим.");
                             market.getThings(clazz).stream()
                                 .filter(Food::getProteins)
                                 .findFirst()
