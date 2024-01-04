@@ -45,9 +45,9 @@ public class Cart<T extends Food> {
         getFoodForCart(Food::getCarbohydrates, "углеводами");
         getFoodForCart(Food::getFats, "жирами");
 
-        if (foodstuffs.stream().anyMatch(Food::getProteins)
-                && foodstuffs.stream().anyMatch(Food::getFats)
-                && foodstuffs.stream().anyMatch(Food::getCarbohydrates))
+        if (checkTheFoods(Food::getProteins)
+                && checkTheFoods(Food::getFats)
+                && checkTheFoods(Food::getCarbohydrates))
         {
             System.out.println("Корзина сбалансирована по БЖУ.");
         } else
@@ -94,5 +94,9 @@ public class Cart<T extends Food> {
                                     .map(foodstuffs::add);
                         }
                 );
+    }
+
+    private boolean checkTheFoods(Predicate<Food> predicate){
+        return foodstuffs.stream().anyMatch(predicate);
     }
 }
