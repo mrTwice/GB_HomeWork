@@ -1,7 +1,6 @@
 package SeminarTask_02;
 
 import SeminarTask_02.Interfaces.Food;
-import SeminarTask_02.Interfaces.Thing;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,7 +39,6 @@ public class Cart<T extends Food> {
 
     public void cardBalancing()
     {
-
         getFoodForCart(Food::getProteins, "протеинами");
         getFoodForCart(Food::getCarbohydrates, "углеводами");
         getFoodForCart(Food::getFats, "жирами");
@@ -52,8 +50,6 @@ public class Cart<T extends Food> {
             System.out.println("Корзина сбалансирована по БЖУ.");
         } else
             System.out.println("Корзина не может быть сбалансирована.");
-
-
     }
 
     public Collection<T> getFoodstuffs() {
@@ -61,14 +57,8 @@ public class Cart<T extends Food> {
     }
 
 
-
     public void printFoodstuffs()
     {
-        /*int index = 1;
-        for (var food : foodstuffs)
-            System.out.printf("[%d] %s (Белки: %s Жиры: %s Углеводы: %s)\n", index++, food.getName(), food.getProteins() ? "Да" : "Нет",
-                    food.getFats() ? "Да" : "Нет", food.getCarbohydrates() ? "Да" : "Нет");*/
-
 
         AtomicInteger index = new AtomicInteger(1);
         foodstuffs.forEach(food -> System.out.printf("[%d] %s (Белки: %s Жиры: %s Углеводы: %s)\n",
@@ -99,4 +89,5 @@ public class Cart<T extends Food> {
     private boolean checkTheFoods(Predicate<Food> predicate){
         return foodstuffs.stream().anyMatch(predicate);
     }
+
 }
