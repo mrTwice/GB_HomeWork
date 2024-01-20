@@ -58,7 +58,7 @@ public class ToDoListApp {
                 }
                 else if (fileName.endsWith(".bin")) {
                     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-                        tasks = (List<ToDoV2>) ois.readObject();
+                        tasks = ((List<ToDoV2>)ois.readObject());
                     }
 
                 }
