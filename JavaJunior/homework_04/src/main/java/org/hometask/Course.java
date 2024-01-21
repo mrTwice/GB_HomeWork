@@ -3,7 +3,7 @@ package org.hometask;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Courses")
+@Table(name = "schoolDB.Course")
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

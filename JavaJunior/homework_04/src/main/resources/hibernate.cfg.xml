@@ -26,7 +26,7 @@
         <property name="hibernate.current_session_context_class">thread</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.none">update</property>
 
         <!-- Mention annotated entity class -->
         <mapping class="org.hometask.Course"/>
