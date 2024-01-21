@@ -1,4 +1,6 @@
-package org.hometask;
+package org.hometask.models;
+
+import org.hometask.Interfaces.CourseDAO;
 
 /**
  * Фабрика реалиций DAO

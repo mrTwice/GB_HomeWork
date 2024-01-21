@@ -1,6 +1,7 @@
-package org.hometask;
+package org.hometask.models;
 
 import org.hibernate.Session;
+import org.hometask.Interfaces.CourseDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

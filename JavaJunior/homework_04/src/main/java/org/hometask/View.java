@@ -1,5 +1,7 @@
 package org.hometask;
 
+import org.hometask.models.Course;
+
 import java.util.List;
 import java.util.Scanner;
 

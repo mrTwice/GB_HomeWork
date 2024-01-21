@@ -1,10 +1,10 @@
-package org.hometask;
+package org.hometask.models;
 
 import java.util.HashMap;
 
 public class TestData {
 
-    static HashMap<String , String > getDataForCourses(){
+    public static HashMap<String , String > getDataForCourses(){
         HashMap<String,String> cources = new HashMap<>();
         cources.put("Введение в алгоритмы и структуры данных","1 семестр");
         cources.put("Основы линейной алгебры","1 семестр");

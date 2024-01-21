@@ -1,4 +1,4 @@
-package org.hometask;
+package org.hometask.models;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

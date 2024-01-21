@@ -1,7 +1,8 @@
-package org.hometask;
+package org.hometask.Interfaces;
+
+import org.hometask.models.Course;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface CourseDAO {
