@@ -1,7 +1,8 @@
 package org.hometask;
 
 import java.sql.SQLException;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface CourseDAO {
     /**
@@ -28,10 +29,11 @@ public interface CourseDAO {
 
     /**
      * Получения списка всех курсов
+     *
      * @return
      * @throws SQLException
      */
-    public Collection getAllCourses() throws SQLException;
+    public List<Course> getAllCourses() throws SQLException;
 
     /**
      * Удаление курса

@@ -1,12 +1,9 @@
 package org.hometask;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -68,11 +65,12 @@ public class CourseDAOImpl implements CourseDAO {
 
     /**
      * Получение списка курсов
+     *
      * @return
      * @throws SQLException
      */
     @Override
-    public Collection getAllCourses() throws SQLException {
+    public List<Course> getAllCourses() throws SQLException {
         List<Course> courses = new ArrayList<>();
         try(Session session = dbConnector.getSession()){
             courses = session.createQuery("FROM Course ", Course.class).getResultList();
