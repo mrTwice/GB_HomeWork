@@ -27,8 +27,8 @@ public class Main {
 //        personDAO.update(person);
 
 //        savePersonObjectToFile(personDAO.getById(2));
-//        Person person = loadPersonObjectFromFile("ВасисуалийИванов.json");
-//        System.out.println(person);
+        Person person = loadPersonObjectFromFile("ВасисуалийИванов.json");
+        System.out.println(person.getAge());
 
 
 

@@ -44,7 +44,7 @@ public class Person {
     }
 
     public int getAge(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         formatter = formatter.withLocale( Locale.US );
         LocalDate date = LocalDate.parse(birthdayDate, formatter);
         return Period.between(date, LocalDate.now()).getYears();
