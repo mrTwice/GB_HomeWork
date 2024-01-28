@@ -18,6 +18,7 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private  int id;
 
     @Column(name="FirstName")

@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class HibernateDAO<T>{
+public abstract class HibernateDAO<T> implements  DAO{
     private DataBaseConnector dataBaseConnector = new DataBaseConnector();
     private Class<T> clazz;
 
@@ -37,7 +37,7 @@ public abstract class HibernateDAO<T>{
 
 
 
-    public void update(T entity) {
+    public void update(Object entity) {
         try(Session session = dataBaseConnector.getSession()){
             session.beginTransaction();
             session.update(entity);
@@ -48,7 +48,7 @@ public abstract class HibernateDAO<T>{
     }
 
 
-    public void create(T entity) {
+    public void create(Object entity) {
         try(Session session = dataBaseConnector.getSession()) {
             session.beginTransaction();
             session.save(entity);
@@ -58,7 +58,7 @@ public abstract class HibernateDAO<T>{
         }
     }
 
-    public void delete(T entity) {
+    public void delete(Object entity) {
         try(Session session = dataBaseConnector.getSession()){
             session.beginTransaction();
             session.delete(entity);
