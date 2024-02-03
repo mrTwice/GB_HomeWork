@@ -14,11 +14,11 @@ public class UserController {
     private RegistrationService service;
 
     @GetMapping
-    public List<User> userList() { return service.getDataProcessingService().getRepository().getUsers(); }
+    public List<User> userList() { return service.getDataProcessingService().getRepository().getAll(); }
 
     @PostMapping("/body")
     public String userAddFromBody(@RequestBody User user) {
-        service.getDataProcessingService().getRepository().getUsers().add(user);
+        service.getDataProcessingService().getRepository().create(user);
         return "User added from body!";
     }
     @RequestMapping(method=RequestMethod.GET, value="/add/{name}/{age}/{email}")

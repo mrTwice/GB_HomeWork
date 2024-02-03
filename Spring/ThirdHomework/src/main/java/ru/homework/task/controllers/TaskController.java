@@ -28,19 +28,19 @@ public class TaskController {
     @GetMapping("/sort")//localhost:8080/tasks/sort
     public List<User> sortUsersByAge()
     {
-        return service.sortUsersByAge(service.getRepository().getUsers());
+        return service.sortUsersByAge(service.getRepository().getAll());
     }
 
 
     @GetMapping("/filter/{age}")
     public List<User> filterUsersByAge(@PathVariable int age){
-        return service.filterUsersByAge(service.getRepository().getUsers(), age);
+        return service.filterUsersByAge(service.getRepository().getAll(), age);
     }
 
     //метод calculateAverageAge
     @GetMapping("/calc")
     public double calculateAverageAge(){
-        return service.calculateAverageAge(service.getRepository().getUsers());
+        return service.calculateAverageAge(service.getRepository().getAll());
     }
 
 }

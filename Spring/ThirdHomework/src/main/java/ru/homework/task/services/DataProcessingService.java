@@ -38,8 +38,8 @@ public class DataProcessingService {
                 .orElse(0);
     }
 
-    public void  addUserToList(User user)
+    public void addUser(User user)
     {
-        repository.getUsers().add(user);
+        repository.create(user);
     }
 }
