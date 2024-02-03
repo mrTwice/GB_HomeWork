@@ -637,3 +637,4 @@ replay_pid*
 *.pfx
 *.cer
 *.crt
+database/
