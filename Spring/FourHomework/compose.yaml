@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: Homework_04
+    env_file:
+      - Homework_04.env
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./database:/var/lib/mysql
