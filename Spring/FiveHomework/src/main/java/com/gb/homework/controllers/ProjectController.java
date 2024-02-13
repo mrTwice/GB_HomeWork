@@ -1,6 +1,7 @@
 package com.gb.homework.controllers;
 
 import com.gb.homework.domain.Project;
+import com.gb.homework.domain.User;
 import com.gb.homework.services.ProjectService;
 import com.gb.homework.services.UserService;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 @AllArgsConstructor

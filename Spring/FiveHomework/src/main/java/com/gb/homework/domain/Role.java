@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -20,8 +21,12 @@ public class Role {
     private Long id;
     private String name;
     @Transient
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },mappedBy = "roles")
+    private Set<User> users = new HashSet<>();;
 
     public Role(){
 

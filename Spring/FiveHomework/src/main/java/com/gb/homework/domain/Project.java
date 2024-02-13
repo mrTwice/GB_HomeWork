@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -21,6 +22,10 @@ public class Project {
     private LocalDateTime createdDate;
 
     @Transient
-    @ManyToMany(mappedBy = "projects")
-    private Set<User> users;
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },mappedBy = "projects")
+    private Set<User> users = new HashSet<>();
 }
