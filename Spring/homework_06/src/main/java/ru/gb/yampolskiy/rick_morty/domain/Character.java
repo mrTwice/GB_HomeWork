@@ -2,10 +2,13 @@ package ru.gb.yampolskiy.rick_morty.domain;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.net.URL;
+import java.util.List;
 
 @Data
 @Getter
@@ -13,7 +16,7 @@ public class Character{
 
     //@Expose(serialize = false)
     @SerializedName("id")
-    private int id;
+    private long id;
 
     @SerializedName("name")
     private  String name;
@@ -50,5 +53,10 @@ public class Character{
 
     @SerializedName("created")
     private String created;
+
+    @Getter
+    @Setter
+    private Episode[] episodes;
+
 
 }

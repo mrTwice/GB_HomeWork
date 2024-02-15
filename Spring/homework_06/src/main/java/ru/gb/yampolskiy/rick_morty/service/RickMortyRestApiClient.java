@@ -1,22 +1,26 @@
 package ru.gb.yampolskiy.rick_morty.service;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.Data;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import ru.gb.yampolskiy.rick_morty.domain.*;
 import ru.gb.yampolskiy.rick_morty.domain.Character;
-
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+
+import static ru.gb.yampolskiy.rick_morty.configuration.StaticResourcesConfiguration.*;
 
 @Data
 @Getter
 @Service
 public class RickMortyRestApiClient {
-    private static final String API_ENDPOINT_CHARACTER ="https://rickandmortyapi.com/api/character/";
-    private static final String API_ENDPOINT_LOCATION ="https://rickandmortyapi.com/api/location/";
-    private static final String API_ENDPOINT_EPISODE ="https://rickandmortyapi.com/api/episode/";
+    private List<Character> characters = new ArrayList<>();
+    private List<Episode> episodes = new ArrayList<>();
+    private List<Location> locations = new ArrayList<>();
     private RestClient restClient = RestClient.create();
 
     public Character requestCharacterById(int id){
@@ -24,7 +28,9 @@ public class RickMortyRestApiClient {
                 .uri(API_ENDPOINT_CHARACTER + id)
                 .retrieve()
                 .body(String.class);
-        return new Gson().fromJson(jsonObject, Character.class);
+        Character character = new Gson().fromJson(jsonObject, Character.class);
+        character.setEpisodes(requestAllEpisodesCharacter(character.getEpisodesUrl()));
+        return character;
     }
 
     public Location requestLocationById(int id){
@@ -43,24 +49,25 @@ public class RickMortyRestApiClient {
         return new Gson().fromJson(jsonObject, Episode.class);
     }
 
-    public <T> Answer<T> requestAllEpisodes(Class<T> tClass){
-        String jsonObject = restClient.get()
-                .uri(API_ENDPOINT_EPISODE)
-                .retrieve()
-                .body(String.class);
-        System.out.println();
-        System.out.println(jsonObject);
-        System.out.println();
-        return new Gson().fromJson(jsonObject, Answer.class);
+    public Episode[] requestAllEpisodesCharacter(String[] urls){
+        Episode[] episodes = new Episode[urls.length];
+        for (int i =0; i < episodes.length; i++){
+            String jsonObject = restClient.get()
+                    .uri(urls[i])
+                    .retrieve()
+                    .body(String.class);
+            episodes[i] = new Gson().fromJson(jsonObject, Episode.class);
+        }
+        return episodes;
     }
 
-    public static void main(String[] args) {
-        RickMortyRestApiClient rickMortyRestApiClient = new RickMortyRestApiClient();
-        Answer answer = rickMortyRestApiClient.requestAllEpisodes(Episode.class);
-        Episode[] episodes = answer.getResults();
-        for (Episode episode: episodes){
-            System.out.println(episode.getName());
-        }
 
+    public <T> Pages<T> requestAll(String endpoint, Class<T> tClass){
+        String jsonObject = restClient.get()
+                .uri(endpoint)
+                .retrieve()
+                .body(String.class);
+        Type type = TypeToken.getParameterized(Pages.class, tClass).getType();
+        return new Gson().fromJson(jsonObject, type);
     }
 }

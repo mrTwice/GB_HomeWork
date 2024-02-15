@@ -7,13 +7,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-public class SpringMvcConfiguration implements WebMvcConfigurer {
+public class StaticResourcesConfiguration implements WebMvcConfigurer {
+    public static final String API_ENDPOINT_CHARACTER ="https://rickandmortyapi.com/api/character/";
+    public static final String API_ENDPOINT_LOCATION ="https://rickandmortyapi.com/api/location/";
+    public static final String API_ENDPOINT_EPISODE ="https://rickandmortyapi.com/api/episode/";
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/styles/css/**")
+        registry.addResourceHandler("/styles/css/**")
                 .addResourceLocations("classpath:/static/css/");
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/static/images/");
+
     }
 }
