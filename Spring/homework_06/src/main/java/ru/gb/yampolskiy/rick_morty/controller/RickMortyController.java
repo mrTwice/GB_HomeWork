@@ -19,19 +19,19 @@ public class RickMortyController {
     private RickMortyRestApiClient rickMortyRestApiClient;
 
     @GetMapping("/character/{id}")
-    public String getCharacterById(@PathVariable Long id, Model model){
+    public String getCharacterById(@PathVariable int id, Model model){
         model.addAttribute("character", rickMortyRestApiClient.requestCharacterById(id));
-        return "character";
+        return "index";
     }
 
     @GetMapping("/location/{id}")
-    public String getLocationById(@PathVariable Long id, Model model){
+    public String getLocationById(@PathVariable int id, Model model){
         model.addAttribute("location", rickMortyRestApiClient.requestLocationById(id));
         return "location";
     }
 
     @GetMapping("/episode/{id}")
-    public String getEpisodeById(@PathVariable Long id, Model model){
+    public String getEpisodeById(@PathVariable int id, Model model){
         model.addAttribute("episode", rickMortyRestApiClient.requestEpisodeById(id));
         return "episode";
     }

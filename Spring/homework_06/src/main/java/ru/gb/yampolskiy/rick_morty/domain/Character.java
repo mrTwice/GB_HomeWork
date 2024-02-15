@@ -5,13 +5,15 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.Getter;
 
+import java.net.URL;
+
 @Data
 @Getter
 public class Character{
 
-    @Expose(serialize = false)
+    //@Expose(serialize = false)
     @SerializedName("id")
-    private Long id;
+    private int id;
 
     @SerializedName("name")
     private  String name;
