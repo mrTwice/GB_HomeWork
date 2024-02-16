@@ -34,18 +34,15 @@ public class Character{
     private  String gender;
 
     @SerializedName("origin")
-    //@Expose(serialize = false)
     private Location originLocation;
 
     @SerializedName("location")
-    //@Expose(serialize = false)
     private Location lastKnownLocation;
 
     @SerializedName("image")
     private String avatarImage;
 
     @SerializedName("episode")
-    //@Expose(serialize = false)
     private String[] episodesUrl;
 
     @SerializedName("url")
