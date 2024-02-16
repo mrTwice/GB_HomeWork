@@ -27,10 +27,10 @@ public class RickMortyController {
 
     @GetMapping("/characters/")
     public String getCharacters( Model model){
-        List<Character> sixCharacters = new Random().ints(6,0, characterService.getCharacters().size()).mapToObj(characterService.getCharacters()::get).toList();
-        for (Character character: sixCharacters)
+        List<Character> sixRandomCharacters = new Random().ints(6,0, characterService.getCharacters().size()).mapToObj(characterService.getCharacters()::get).toList();
+        for (Character character: sixRandomCharacters)
             character.setEpisodes(episodeService.requestAllEpisodesCharacter(character.getEpisodesUrl()));
-        model.addAttribute("characters", sixCharacters);
+        model.addAttribute("characters", sixRandomCharacters);
         return "characters";
     }
 
