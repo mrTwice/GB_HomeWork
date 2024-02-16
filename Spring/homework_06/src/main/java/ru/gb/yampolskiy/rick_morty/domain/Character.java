@@ -14,7 +14,6 @@ import java.util.List;
 @Getter
 public class Character{
 
-    //@Expose(serialize = false)
     @SerializedName("id")
     private long id;
 
