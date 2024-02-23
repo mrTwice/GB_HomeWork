@@ -2,7 +2,6 @@ package com.gb.homework.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,11 +20,7 @@ public class Role {
     private Long id;
     private String name;
     @Transient
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();;
 
     public Role(){

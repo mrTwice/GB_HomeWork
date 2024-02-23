@@ -36,10 +36,10 @@
                 <div class="collapse mt-3" id="collapseExample1">
                     <div class="card card-body">
                         <div class="form-group">
-                            <form action="/" method="post">
-                                Имя пользователя: <input type="text" name="username" class="form-control">
-                                Password: <input type="text" name="password" class="form-control">
-                                Email: <input type="text" name="email" class="form-control">
+                            <form action="#" th:action="@{/create}" th:object="${user}" method="post">
+                                Имя пользователя: <input type="text" id="username" name="username" placeholder="username" class="form-control">
+                                Password: <input type="text" id="password" name="password" placeholder="password" class="form-control">
+                                Email: <input type="text" name="email" placeholder="Email" class="form-control">
                                 <button class="btn btn-primary" type="submit" value="Submit">Создать</button>
                             </form>
                         </div>

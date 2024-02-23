@@ -2,23 +2,21 @@ package com.gb.homework.services;
 
 import com.gb.homework.domain.Role;
 import com.gb.homework.repositories.RoleRepository;
+import jakarta.annotation.PostConstruct;
+import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 
 @Service
+@CommonsLog(topic = "RoleService")
 public class RoleService {
 
     @Autowired
     private RoleRepository roleRepository;
 
     public boolean createNewRole(String role){
-        if(roleRepository.findAll().isEmpty()){
-            roleRepository.save(new Role("ROLE_USER"));
-            roleRepository.save(new Role("ROLE_ADMIN"));
-        }
-
         Role roleFromDB = roleRepository.findRoleByName(role);
         if (roleFromDB != null)
             return false;
@@ -48,6 +46,20 @@ public class RoleService {
             return false;
         roleRepository.save(role);
         return true;
+    }
+
+    @PostConstruct
+    private void addBaseRoles(){
+        if(!roleRepository.existsRoleByName("ROLE_USER")){
+            roleRepository.save(new Role("ROLE_USER"));
+            log.info("ROLE_USER is created");
+        } else
+            log.info("ROLE_USER is exist");
+        if(!roleRepository.existsRoleByName("ROLE_ADMIN")) {
+            roleRepository.save(new Role("ROLE_ADMIN"));
+            log.info("ROLE_ADMIN is created");
+        } else
+            log.info("ROLE_ADMIN is exist");
     }
 
 }

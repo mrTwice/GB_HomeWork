@@ -22,10 +22,6 @@ public class Project {
     private LocalDateTime createdDate;
 
     @Transient
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },mappedBy = "projects")
+    @ManyToMany(mappedBy = "projects")
     private Set<User> users = new HashSet<>();
 }

@@ -29,7 +29,7 @@
         <div class="card card-body">
             <div class="form-group">
                 <div class="container mt-3">
-                    <form action="#" th:action="@{/edit-user}" th:object="${user}" method="post">
+                    <form action="#" th:action="@{/edit-user}" th:object="${updatedUser}" method="post">
                         <div class="form-group row">
                             <label for="id">ID</label>
                             <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"

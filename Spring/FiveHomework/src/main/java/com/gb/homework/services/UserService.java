@@ -2,11 +2,9 @@ package com.gb.homework.services;
 
 import com.gb.homework.domain.Role;
 import com.gb.homework.domain.User;
-import com.gb.homework.repositories.ProjectRepository;
 import com.gb.homework.repositories.RoleRepository;
 import com.gb.homework.repositories.UserRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +29,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public boolean createUser(User user) {
+    public boolean saveUser(User user) {
 
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
@@ -39,7 +37,10 @@ public class UserService {
             return false;
 
         user.setPassword(String.valueOf(user.getPassword().hashCode()));
-        user.setRoles(Collections.singleton(roleRepository.findRoleByName("ROLE_USER")));
+        if(userRepository.findAll().isEmpty()){
+            user.setRoles(Collections.singleton(roleRepository.save(new Role(("ROLE_ADMIN")))));
+        }else
+            user.setRoles(Collections.singleton(roleRepository.findRoleByName("ROLE_USER")));
         userRepository.save(user);
         return true;
     }
@@ -57,4 +58,18 @@ public class UserService {
         return true;
     }
 
+    public User createUser(){
+        return new User();
+    }
+
+    @PostConstruct
+    public void addAdminUser(){
+        if(!userRepository.existsByUsername("admin")){
+            User adminUser = createUser();
+            adminUser.setUsername("admin");
+            adminUser.setEmail("admin@mail.ru");
+            adminUser.setPassword("admin");
+            saveUser(adminUser);
+        }
+    }
 }

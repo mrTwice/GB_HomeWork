@@ -1,11 +1,8 @@
 package com.gb.homework.services;
 
 import com.gb.homework.domain.Project;
-import com.gb.homework.domain.User;
 import com.gb.homework.repositories.ProjectRepository;
 import com.gb.homework.repositories.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

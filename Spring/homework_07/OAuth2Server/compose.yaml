@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: Homework_07_OAuth2Server
+    env_file:
+      - Homework_07_OAuth2Server.env
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./database:/var/lib/mysql

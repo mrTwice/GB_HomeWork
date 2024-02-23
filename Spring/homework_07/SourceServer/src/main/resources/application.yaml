@@ -1,0 +1,18 @@
+server:
+  port: 8081
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8079
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    datasource:
+      url: jdbc:mysql://localhost:3307/Homework
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: User
+      password: Password
