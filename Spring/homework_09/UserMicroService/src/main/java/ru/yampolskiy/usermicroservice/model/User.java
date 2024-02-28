@@ -1,15 +1,21 @@
 package ru.yampolskiy.usermicroservice.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 @Getter
 @Setter
+@JsonSerialize
+@JsonDeserialize
 @Entity
 @Table(name = "users")
 public class User {

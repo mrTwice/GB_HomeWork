@@ -2,14 +2,13 @@ package ru.yampolskiy.usermicroservice.controller;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.yampolskiy.usermicroservice.model.User;
 import ru.yampolskiy.usermicroservice.service.UserService;
 
 import java.util.List;
-
-import static org.springframework.http.HttpStatus.CREATED;
 
 @Data
 @RestController
@@ -34,10 +33,20 @@ public class UserController {
         }
     }
 
+    @GetMapping("/find/{username}")
+    public ResponseEntity<User> findUserByUsername(@PathVariable String username){
+        User user = userService.findUserByUserName(username);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User createdUser = userService.createUser(user);
-        return ResponseEntity.status(CREATED).body(createdUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
     @PutMapping("/{id}")

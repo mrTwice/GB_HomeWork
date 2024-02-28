@@ -1,6 +1,6 @@
 package ru.yampolskiy.usermicroservice.service;
 
-import lombok.Data;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yampolskiy.usermicroservice.model.Role;
@@ -26,16 +26,19 @@ public class UserService {
         return userOptional.orElse(null);
     }
 
+    public User findUserByUserName(String username){
+        Optional<User> optionalUser = userRepository.findUserByUsername(username);
+        return optionalUser.orElse(null);
+    }
+
+
     public User createUser(User user) {
-        User newUser = getUserById(user.getId());
-        if(newUser != null)
-            throw new RuntimeException("Пользователь с таким id cуществует");
-        newUser = userRepository.findUserByUsername(user.getUsername()).orElse(null);
+        User newUser = userRepository.findUserByUsername(user.getUsername()).orElse(null);
         if(newUser != null)
             throw new RuntimeException("Пользователь с таким именем существует");
         user.setId(null);
-        user.setRoles(Collections.singleton(Role.USER));
-        return userRepository.save(user);
+        User createdUser = userRepository.save(user);
+        return createdUser;
     }
 
     public User updateUser(Long id, User user) {
@@ -49,4 +52,5 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
 }
