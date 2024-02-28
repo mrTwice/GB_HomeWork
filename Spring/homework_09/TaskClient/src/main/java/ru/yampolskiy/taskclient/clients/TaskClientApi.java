@@ -8,7 +8,7 @@ import ru.yampolskiy.taskclient.models.task.Task;
 
 import java.util.List;
 
-@FeignClient(name = "tasks")
+@FeignClient(name = "tasks", url = "http://localhost:8081/api/tasks")
 public interface TaskClientApi {
 
     @GetMapping("/user/{id}")

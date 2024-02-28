@@ -28,8 +28,8 @@ public class TaskService {
     }
 
     public Task createTask(Task task) {
-        if(getTaskById(task.getId()) != null)
-            task.setId(null);
+        if(task.getId() != null)
+            throw new RuntimeException("Not Null Id on create task");
         return taskRepository.save(task);
     }
 
