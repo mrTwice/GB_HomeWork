@@ -1,13 +1,10 @@
 package ru.yampolskiy.usermicroservice.service;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.yampolskiy.usermicroservice.model.Role;
-import ru.yampolskiy.usermicroservice.repository.UserRepository;
 import ru.yampolskiy.usermicroservice.model.User;
+import ru.yampolskiy.usermicroservice.repository.UserRepository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,23 +30,25 @@ public class UserService {
 
 
     public User createUser(User user) {
-        User newUser = userRepository.findUserByUsername(user.getUsername()).orElse(null);
-        if(newUser != null)
-            throw new RuntimeException("Пользователь с таким именем существует");
+        if (userRepository.existsUserByUsername(user.getUsername())) {
+            throw new RuntimeException("Пользователь с таким именем уже существует");
+        }
         user.setId(null);
         User createdUser = userRepository.save(user);
         return createdUser;
     }
 
     public User updateUser(Long id, User user) {
-        User updateUser = getUserById(id);
-        if(updateUser == null)
-            throw  new RuntimeException("Пользователь не существует");
-        user.setId(id);
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("Пользователь таким id "+ id +" не существует");
+        }
         return userRepository.save(user);
     }
 
     public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("Пользователь таким id "+ id +" не существует");
+        }
         userRepository.deleteById(id);
     }
 
