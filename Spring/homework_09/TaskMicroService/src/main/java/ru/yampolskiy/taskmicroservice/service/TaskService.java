@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.yampolskiy.taskmicroservice.model.Task;
 import ru.yampolskiy.taskmicroservice.repository.TaskRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public class TaskService {
     }
 
     public List<Task> getAllUserTask(Long id) {
-        return taskRepository.findAllByOwnerId(id).orElse(null);
+        return taskRepository.findAllByOwnerId(id).orElse(Collections.emptyList());
     }
 
     public Task getTaskById(Long id) {
@@ -28,17 +29,24 @@ public class TaskService {
     }
 
     public Task createTask(Task task) {
-        if(task.getId() != null)
-            throw new RuntimeException("Not Null Id on create task");
+        if (task.getId() != null) {
+            throw new IllegalArgumentException("ID должен быть пустым при создании задачи");
+        }
         return taskRepository.save(task);
     }
 
     public Task updateTask(Long id, Task task) {
+        if (!taskRepository.existsById(id)) {
+            throw new IllegalArgumentException("Задачи с ID " + id + " не существует");
+        }
         task.setId(id);
         return taskRepository.save(task);
     }
 
     public void deleteTask(Long id) {
+        if (!taskRepository.existsById(id)) {
+            throw new IllegalArgumentException("Задачи с ID " + id + " не существует");
+        }
         taskRepository.deleteById(id);
     }
 }
