@@ -29,12 +29,12 @@ public class TaskManagerController {
             userService.registerNewUser(admin);
         }
 
-        Task newTask = taskService.createNewTask(new Task("Первая задача",
-                "Переименовать учетную запись",
-                TaskStatus.OPEN,
-                userService.findUserByUserName("admin").getId(),
-                LocalDateTime.now(),
-                LocalDateTime.now(),
-                null));
+//        Task newTask = taskService.createNewTask(new Task("Первая задача",
+//                "Переименовать учетную запись в новую папку",
+//                TaskStatus.OPEN,
+//                userService.findUserByUserName("admin").getId(),
+//                LocalDateTime.now(),
+//                LocalDateTime.now(),
+//                null));
     }
 }
