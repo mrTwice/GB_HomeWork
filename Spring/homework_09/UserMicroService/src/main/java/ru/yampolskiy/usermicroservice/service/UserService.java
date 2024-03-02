@@ -2,9 +2,11 @@ package ru.yampolskiy.usermicroservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.yampolskiy.usermicroservice.model.Role;
 import ru.yampolskiy.usermicroservice.model.User;
 import ru.yampolskiy.usermicroservice.repository.UserRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +36,9 @@ public class UserService {
             throw new RuntimeException("Пользователь с таким именем уже существует");
         }
         user.setId(null);
+        user.setActive(true);
+        if(user.getRoles() == null)
+            user.setRoles(Collections.singleton(Role.USER));
         User createdUser = userRepository.save(user);
         return createdUser;
     }
