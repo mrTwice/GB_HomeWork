@@ -16,6 +16,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -54,7 +55,7 @@ public class UserService {
         if (!userRepository.existsById(id)) {
             throw new RuntimeException("Пользователь таким id "+ id +" не существует");
         }
-        userRepository.deleteById(id);
+        User deleteUser = userRepository.deleteUserById(id).get();
     }
 
 }
