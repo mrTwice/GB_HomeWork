@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.yampolskiy.taskclient.models.user.User;
+import ru.yampolskiy.taskclient.service.FileGateway;
 import ru.yampolskiy.taskclient.service.UserService;
 
 @Controller
@@ -20,6 +21,9 @@ public class RegistrationController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private FileGateway fileGateway;
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {

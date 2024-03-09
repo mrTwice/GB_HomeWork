@@ -3,8 +3,10 @@ package ru.yampolskiy.taskmicroservice.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yampolskiy.taskmicroservice.model.Task;
+import ru.yampolskiy.taskmicroservice.model.TaskStatus;
 import ru.yampolskiy.taskmicroservice.repository.TaskRepository;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +34,9 @@ public class TaskService {
         if (task.getId() != null) {
             throw new IllegalArgumentException("ID должен быть пустым при создании задачи");
         }
+        task.setCreated(LocalDateTime.now());
+        task.setStatus(TaskStatus.OPEN);
+        task.setLastUpdate(task.getCreated());
         return taskRepository.save(task);
     }
 
@@ -40,6 +45,7 @@ public class TaskService {
             throw new IllegalArgumentException("Задачи с ID " + id + " не существует");
         }
         task.setId(id);
+        task.setLastUpdate(LocalDateTime.now());
         return taskRepository.save(task);
     }
 
