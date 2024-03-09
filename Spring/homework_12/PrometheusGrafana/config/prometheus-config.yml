@@ -1,0 +1,42 @@
+global:
+  scrape_interval:     15s
+  scrape_timeout:      10s
+
+scrape_configs:
+  - job_name: 'UsersMicroservice'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8080' ]
+
+  - job_name: 'TasksMicroservice'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8081' ]
+
+  - job_name: 'WebClient'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8083' ]
+    # Данные аутентификации на сервере (на серверне настроен SpringSecurity)
+    basic_auth:
+      # Имя пользователя
+      username: admin
+      # Пароль
+      password: admin
+
+  - job_name: 'EurekaServer'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8761' ]
+
+  - job_name: 'ApiGateway'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'host.docker.internal:8762' ]
+
+    metric_relabel_configs:
+      - source_labels: [__address__]
+        target_label: __metrics_path__
+        regex: (.+)
+        replacement: /$1
+
