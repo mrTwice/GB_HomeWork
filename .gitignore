@@ -640,3 +640,4 @@ replay_pid*
 database/
 data/
 config.toml
+CICD/*/gitlab_runner/config
