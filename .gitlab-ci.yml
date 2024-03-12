@@ -6,46 +6,54 @@ stages:
   - build
   - test
   - deploy
+  - pages
 
 # Определение задач для каждого этапа
 build:
   stage: build
   script:
     - echo "Imitating build process..."  # Имитация сборки
+    - mkdir build
+    - cp -r CICD/homework_01/web/* build
     - echo "Build process completed successfully."
   artifacts:
     paths:
-      - CICD/homework_01/web/index.html  # Опубликуем index.html в артефактах
+      - build/index.html  # Опубликуем index.html в артефактах
 
 test:
   stage: test
   script:
     # Проверка содержимого переданного файла index.html
-    - cat CICD/homework_01/web/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
+    - ls $CI_PROJECT_DIR/build/
+    - cat $CI_PROJECT_DIR/build/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
+    - mkdir test
+    - cp -r build/* test
   artifacts:
     paths:
-      - CICD/homework_01/web/index.html
+      - test/index.html
   dependencies:
     - build  # Этап test зависит от этапа build
 
 deploy:
   stage: deploy
   script:
-    - mkdir public_web
-    - cp -r CICD/homework_01/web/* public_web
+    - ls $CI_PROJECT_DIR/test/
+    - cat $CI_PROJECT_DIR/test/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
+    - mkdir public
+    - cp -r test/* public
   artifacts:
     paths:
-      - public_web
+      - public/index.html
     expire_in: 1 week  # Укажем время хранения артефактов
 
 # Определение настройки Pages
 pages:
-  stage: deploy
+  stage: pages
   script:
-    - cat public/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
-    - cp -r public_web public
+    - ls $CI_PROJECT_DIR/public/
+    - cat $CI_PROJECT_DIR/public/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
   artifacts:
     paths:
-      - public
+      - public/index.html
   only:
     - main
