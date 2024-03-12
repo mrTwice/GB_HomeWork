@@ -17,7 +17,7 @@ deploy:
   stage: deploy
   script:
     - mkdir .public
-    - cp -r ./web/* .public
+    - cp -r ./CICD/homework_01/web/* .public
   artifacts:
     paths:
       - .public
