@@ -22,6 +22,9 @@ test:
   script:
     # Проверка содержимого переданного файла index.html
     - cat CICD/homework_01/web/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
+  artifacts:
+    paths:
+      - CICD/homework_01/web/index.html
   dependencies:
     - build  # Этап test зависит от этапа build
 
@@ -29,10 +32,10 @@ deploy:
   stage: deploy
   script:
     - mkdir public_web
-    - cp -r CICD/homework_01/web/* public
+    - cp -r CICD/homework_01/web/* public_web
   artifacts:
     paths:
-      - public
+      - public_web
     expire_in: 1 week  # Укажем время хранения артефактов
 
 # Определение настройки Pages
@@ -40,7 +43,7 @@ pages:
   stage: deploy
   script:
     - cat public/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
-    - mv public public
+    - mv public_web public
   artifacts:
     paths:
       - public
