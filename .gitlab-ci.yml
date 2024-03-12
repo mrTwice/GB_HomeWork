@@ -28,8 +28,8 @@ test:
 deploy:
   stage: deploy
   script:
-    - mkdir .public
-    - cp -r CICD/homework_01/web/* .public
+    - mkdir public_web
+    - cp -r CICD/homework_01/web/* public_web
   artifacts:
     paths:
       - .public
@@ -39,7 +39,7 @@ deploy:
 pages:
   stage: deploy
   script:
-    - mv .public public
+    - mv public_web public
   artifacts:
     paths:
       - public
