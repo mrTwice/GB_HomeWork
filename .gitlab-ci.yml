@@ -43,9 +43,9 @@ pages:
   stage: deploy
   script:
     - cat public/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
-    - mv public_web public
+    - cp -r public_web public
   artifacts:
     paths:
       - public
   only:
-    - main  # Используем main вместо master
+    - main
