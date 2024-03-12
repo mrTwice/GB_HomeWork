@@ -638,3 +638,5 @@ replay_pid*
 *.cer
 *.crt
 database/
+data/
+config.toml
