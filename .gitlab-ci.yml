@@ -32,7 +32,7 @@ deploy:
     - cp -r CICD/homework_01/web/* public_web
   artifacts:
     paths:
-      - .public
+      - public_web
     expire_in: 1 week  # Укажем время хранения артефактов
 
 # Определение настройки Pages
