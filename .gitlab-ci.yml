@@ -29,17 +29,18 @@ deploy:
   stage: deploy
   script:
     - mkdir public_web
-    - cp -r CICD/homework_01/web/* public_web
+    - cp -r CICD/homework_01/web/* public
   artifacts:
     paths:
-      - public_web
+      - public
     expire_in: 1 week  # Укажем время хранения артефактов
 
 # Определение настройки Pages
 pages:
   stage: deploy
   script:
-    - mv public_web public
+    - cat public/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
+    - mv public public
   artifacts:
     paths:
       - public
