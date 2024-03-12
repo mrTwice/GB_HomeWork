@@ -641,3 +641,4 @@ database/
 data/
 config.toml
 CICD/*/gitlab_runner/config/*
+.runner_system_id
