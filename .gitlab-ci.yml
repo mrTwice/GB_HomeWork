@@ -1,2 +1,51 @@
-# The Docker image that will be used to build your app
+# Определение используемого образа Docker
 image: alpine:latest
+
+# Определение этапов пайплайна
+stages:
+  - build
+  - test
+  - deploy
+
+# Определение задач для каждого этапа
+build:
+  stage: build
+  script:
+    - echo "Imitating build process..."  # Имитация сборки
+    - echo "Build process completed successfully."
+  artifacts:
+    paths:
+      - CICD/homework_01/web/index.html  # Опубликуем index.html в артефактах
+
+test:
+  stage: test
+  script:
+    # Проверка содержимого переданного файла index.html
+    - cat CICD/homework_01/web/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
+  artifacts:
+    paths:
+      - CICD/homework_01/web/index.html
+  dependencies:
+    - build  # Этап test зависит от этапа build
+
+deploy:
+  stage: deploy
+  script:
+    - mkdir public_web
+    - cp -r CICD/homework_01/web/* public_web
+  artifacts:
+    paths:
+      - public_web
+    expire_in: 1 week  # Укажем время хранения артефактов
+
+# Определение настройки Pages
+pages:
+  stage: deploy
+  script:
+    - cat public/index.html | grep -q "Это мое первое задание по CI/CD" || exit 1
+    - mv public_web public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main  
