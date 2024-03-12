@@ -10,7 +10,7 @@ stages:
 test:
   stage: test
   script:
-    # Проверка доступности страницы
+# Проверка доступности страницы
     - curl --fail http://$CI_PAGES_URL || exit 1
 
 deploy:
